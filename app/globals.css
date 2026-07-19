@@ -29,6 +29,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .fullscreen { border: 0; background: transparent; color: var(--navy); font-size: 12px; font-weight: 800; cursor: pointer; }
 
 .slide-frame { position: relative; width: min(1600px, calc((100svh - 120px) * 16 / 9), calc(100vw - 28px)); aspect-ratio: 16 / 9; overflow: hidden; display: grid; grid-template-columns: 54% 46%; align-items: stretch; padding: 2.2% 4.3% 2.2% 3.8%; gap: 4.2%; background: var(--cream); box-shadow: 0 22px 65px #3d2e2630; }
+.slide-frame.welcome-slide { display: block; padding: 0; background: #fbf8f4; }
+.welcome-art { display: block; width: 100%; height: 100%; object-fit: contain; }
 .decor { position: absolute; pointer-events: none; background: #efe5fa; }
 .decor-top { width: 42px; height: 42px; border-radius: 50%; top: 38px; right: 82px; }
 .decor-right { width: 280px; height: 300px; border-radius: 48% 0 0 48%; top: 126px; right: -180px; transform: rotate(25deg); }
@@ -158,7 +160,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .haaji-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
 .treasure { align-self: center; color: var(--purple); font-size: 11px; font-weight: 900; }.treasure b { display: block; color: var(--navy); font-size: 30px; text-align: center; }
 .choice-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }.choice-row div { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 3px; border: 1px solid #ddcffd; border-radius: 10px; background: #fff; transform: rotateY(90deg); animation: card-flip .45s calc(var(--i, 1) * .2s + .4s) forwards; }.choice-row i { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--lavender); color: var(--navy); font-size: 9px; font-style: normal; font-weight: 900; }.choice-row b { color: var(--purple); font-size: 10px; }.choice-row small { color: var(--muted); font-size: 8px; }
-.choice-result { text-align: center; color: var(--muted); font-size: 10px; opacity: 0; animation: pop-word .45s 1.25s forwards; }.choice-result b { color: var(--navy); font-size: 13px; }.choice-result span { display: inline-block; margin-left: 8px; padding: 4px 8px; border-radius: 6px; background: var(--pale-gold); color: var(--navy); font-weight: 900; }
+.choice-result { text-align: center; color: var(--muted); font-size: 10px; opacity: 0; animation: pop-word .45s 1.45s forwards; }.choice-result b { color: var(--navy); font-size: 13px; }.choice-result span { display: inline-block; margin-left: 8px; padding: 4px 8px; border-radius: 6px; background: var(--pale-gold); color: var(--navy); font-weight: 900; }
 
 /* Scoring */
 .scoring-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6%; padding: 4%; }.points-row { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 9px 14px; border-radius: 10px; color: var(--navy); transform: translateX(-20px); opacity: 0; animation: guess-in .4s calc(var(--i, 1) * .2s) forwards; }.points-row span { font-size: 24px; font-weight: 900; }.points-row.gold { background: #fff0b8; animation-delay: .2s; }.points-row.silver { background: #efebf4; animation-delay: .5s; }.points-row.bronze { background: #f3d6c5; animation-delay: .8s; }.bonus-card { display: flex; justify-content: space-between; padding: 10px; border: 1px dashed var(--purple); border-radius: 10px; color: var(--purple); font-size: 10px; }.score-equation { text-align: center; color: var(--navy); font-size: 10px; font-weight: 900; }
@@ -253,6 +255,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .slide-picker label, .fullscreen { display: none; }
   .slide-picker select { min-width: 140px; }
   .slide-frame { width: 100%; aspect-ratio: auto; min-height: 0; overflow: hidden; grid-template-columns: 1fr; gap: 28px; padding: 28px 18px 48px; }
+  .slide-frame.welcome-slide { aspect-ratio: 1731 / 909; padding: 0; }
+  .welcome-art { height: auto; }
   .instruction-card { height: auto; min-height: 750px; padding: 28px 24px; }
   .game-heading h1 { font-size: 34px; }
   .fact-block h2 { flex-basis: 124px; }

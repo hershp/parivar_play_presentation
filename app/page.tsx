@@ -331,7 +331,8 @@ function SamayDemo() {
 }
 
 function HaajiDemo() {
-  return <div className="haaji-demo"><div className="treasure">POT <b>300</b></div><div className="choice-row"><div><i>P1</i><b>HAAJI</b><small>share</small></div><div><i>P2</i><b>NAAJI</b><small>steal</small></div><div><i>P3</i><b>HAAJI</b><small>share</small></div></div><div className="choice-result">ONE THIEF<br/><b>TAKES THE POT</b><span>+300</span></div></div>;
+  const choices = [["P1", "HAAJI", "share"], ["P2", "NAAJI", "steal"], ["P3", "HAAJI", "share"]];
+  return <div className="haaji-demo"><div className="treasure">POT <b>300</b></div><div className="choice-row">{choices.map(([player, choice, meaning], i) => <div style={{ "--i": i } as React.CSSProperties} key={player}><i>{player}</i><b>{choice}</b><small>{meaning}</small></div>)}</div><div className="choice-result">ONE THIEF<br/><b>TAKES THE POT</b><span>+300</span></div></div>;
 }
 
 function ScoringDemo() {
@@ -473,10 +474,8 @@ export default function Home() {
         <button className="fullscreen" onClick={() => document.documentElement.requestFullscreen?.()} aria-label="Enter full screen">Full screen ⛶</button>
       </nav>
 
-      <div className={`slide-frame${slide.demo === "scoring" ? " scoring-slide" : ""}`} aria-live="polite">
-        <div className="decor decor-top"/><div className="decor decor-right"/><div className="decor decor-bottom"/><div className="decor decor-dot"/>
-        {slide.demo === "scoring" ? <ScoringPage /> : <><InstructionCard slide={slide} /><div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div></>}
-        <span className="page-number">{slide.number}</span>
+      <div className={`slide-frame${slide.demo === "scoring" ? " scoring-slide" : slide.demo === "overview" ? " welcome-slide" : ""}`} aria-live="polite">
+        {slide.demo === "overview" ? <img className="welcome-art" src="/parivar-play-welcome.png" alt="Parivar Play — eight games, animated rules, one leaderboard" /> : <><div className="decor decor-top"/><div className="decor decor-right"/><div className="decor decor-bottom"/><div className="decor decor-dot"/>{slide.demo === "scoring" ? <ScoringPage /> : <><InstructionCard slide={slide} /><div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div></>}<span className="page-number">{slide.number}</span></>}
       </div>
 
       <footer className="deck-controls">
