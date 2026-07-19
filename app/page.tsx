@@ -21,9 +21,7 @@ type Slide = {
   shortTitle: string;
   eyebrow: string;
   victory: string;
-  time: string;
   rules: string[];
-  tip: string;
   demo: DemoKind;
   demoLabel: string;
   demoMeta: string;
@@ -37,7 +35,6 @@ const slides: Slide[] = [
     shortTitle: "Welcome",
     eyebrow: "8 GAMES · ONE LEADERBOARD",
     victory: "Play bold. Finish on top.",
-    time: "60–90 Minutes",
     rules: [
       "Split everyone into three-player teams",
       "Open each game from the presentation",
@@ -46,7 +43,6 @@ const slides: Slide[] = [
       "Keep the leaderboard visible between games",
       "Use the final tie-break only when needed",
     ],
-    tip: "Use arrow keys, swipe, or the controls below to move page by page.",
     demo: "overview",
     demoLabel: "TONIGHT'S LINEUP",
     demoMeta: "8 GAMES",
@@ -57,7 +53,6 @@ const slides: Slide[] = [
     shortTitle: "Word Search",
     eyebrow: "FIND THE HIDDEN WORDS",
     victory: "First to find all 10 wins",
-    time: "No Time Limit",
     rules: [
       "Find ten words hidden in a 10×10 grid",
       "Words may run horizontally or vertically",
@@ -66,7 +61,6 @@ const slides: Slide[] = [
       "Use the provided Gujarati and English words",
       "The first player to find all ten wins",
     ],
-    tip: "The source sheet includes meanings that can appear after each find.",
     demo: "wordsearch",
     demoLabel: "WORD GRID",
     demoMeta: "3 / 10",
@@ -77,7 +71,6 @@ const slides: Slide[] = [
     shortTitle: "Number Flow",
     eyebrow: "CONNECT EVERY NUMBER",
     victory: "First to finish 3 rounds",
-    time: "Best of Five",
     rules: [
       "All players receive the same numbered grid",
       "Start at 1 and connect numbers in order",
@@ -86,7 +79,6 @@ const slides: Slide[] = [
       "The first correct path wins the round",
       "Three round wins takes the match",
     ],
-    tip: "The animated path demonstrates direction without revealing a puzzle.",
     demo: "numberflow",
     demoLabel: "DRAW 1 → 8 · FILL EVERY CELL",
     demoMeta: "ROUND 2 / 5",
@@ -98,7 +90,6 @@ const slides: Slide[] = [
     shortTitle: "Battle Boxes",
     eyebrow: "DRAW LINES · CLAIM BOXES",
     victory: "Most boxes wins",
-    time: "3 Players",
     rules: [
       "Players share one grid of dots",
       "Take turns drawing one horizontal or vertical line",
@@ -107,7 +98,6 @@ const slides: Slide[] = [
       "Closing a box gives you another turn",
       "The player with the most boxes wins",
     ],
-    tip: "Watch for double-box opportunities before placing a line.",
     demo: "boxes",
     demoLabel: "BOXES BATTLE",
     demoMeta: "P2 TURN",
@@ -119,7 +109,6 @@ const slides: Slide[] = [
     shortTitle: "Minesweeper",
     eyebrow: "BE THE LAST PLAYER STANDING",
     victory: "First to win 2 rounds",
-    time: "3 Players",
     rules: [
       "Share the same grid and take turns clicking",
       "Safe squares reveal nearby mine counts",
@@ -128,7 +117,6 @@ const slides: Slide[] = [
       "Running out of turn time also eliminates you",
       "Last player standing wins the round",
     ],
-    tip: "A number counts mines in all eight neighboring squares.",
     demo: "minesweeper",
     demoLabel: "SHARED BOARD",
     demoMeta: "P1 TURN",
@@ -140,7 +128,6 @@ const slides: Slide[] = [
     shortTitle: "Codebreaker",
     eyebrow: "CRACK THE FOUR-DIGIT CODE",
     victory: "First to win 2 rounds",
-    time: "Real-Time",
     rules: [
       "All three players attack the same secret code",
       "Submit unlimited four-digit guesses",
@@ -149,7 +136,6 @@ const slides: Slide[] = [
       "Red means the digit is not in the code",
       "First to crack the code wins the round",
     ],
-    tip: "Use each color response to eliminate possibilities systematically.",
     demo: "codebreaker",
     demoLabel: "CRACK THE CODE",
     demoMeta: "GUESS 04",
@@ -161,7 +147,6 @@ const slides: Slide[] = [
     shortTitle: "Crossword",
     eyebrow: "SOLVE FROM THE CLUES",
     victory: "First correct grid wins",
-    time: "10–15 Minutes",
     rules: [
       "Read the across and down clues",
       "Enter one answer into each numbered slot",
@@ -170,7 +155,6 @@ const slides: Slide[] = [
       "Incorrect entries remain editable",
       "The first complete correct grid wins",
     ],
-    tip: "Start with short answers such as atma, ekta, guru, or soul.",
     demo: "crossword",
     demoLabel: "CLUE BOARD",
     demoMeta: "6 ACROSS",
@@ -181,7 +165,6 @@ const slides: Slide[] = [
     shortTitle: "Samay Sparsh",
     eyebrow: "CATCH THE TARGET TIME",
     victory: "Closest player wins",
-    time: "5 Rounds",
     rules: [
       "A target duration is announced",
       "The visible clock disappears when the round begins",
@@ -190,7 +173,6 @@ const slides: Slide[] = [
       "The closest time wins that round",
       "Most round wins takes the game",
     ],
-    tip: "Encourage players to count internally—no tapping or outside clocks.",
     demo: "samay",
     demoLabel: "CATCH THE TIME",
     demoMeta: "TARGET 10s",
@@ -202,7 +184,6 @@ const slides: Slide[] = [
     shortTitle: "Haaji Naaji",
     eyebrow: "SHARE, STEAL, BLUFF",
     victory: "Most treasure wins",
-    time: "4 Rounds",
     rules: [
       "Three players negotiate before every choice",
       "Secretly choose Haaji (share) or Naaji (steal)",
@@ -211,7 +192,6 @@ const slides: Slide[] = [
       "All sharers split the pot evenly",
       "The biggest treasure pot appears last",
     ],
-    tip: "Promises are allowed. Keeping them is optional.",
     demo: "haaji",
     demoLabel: "SECRET CHOICE",
     demoMeta: "POT 300",
@@ -223,7 +203,6 @@ const slides: Slide[] = [
     shortTitle: "Scoring",
     eyebrow: "TURN EVERY GAME INTO POINTS",
     victory: "Highest total after 8 games",
-    time: "Update Each Round",
     rules: [
       "First place earns 10 overall points",
       "Second place earns 6 overall points",
@@ -232,7 +211,6 @@ const slides: Slide[] = [
       "Record scores before opening the next game",
       "Use one sudden-death challenge for ties",
     ],
-    tip: "Game-specific points determine placement; overall points determine the champion.",
     demo: "scoring",
     demoLabel: "POINTS SYSTEM",
     demoMeta: "8 GAMES",
@@ -243,7 +221,6 @@ const slides: Slide[] = [
     shortTitle: "Leaderboard",
     eyebrow: "THE FINAL COUNT",
     victory: "Crown the champion",
-    time: "After Game 8",
     rules: [
       "Confirm every game placement",
       "Add placement and bonus points",
@@ -252,7 +229,6 @@ const slides: Slide[] = [
       "Reveal the podium from third to first",
       "Celebrate the winning team",
     ],
-    tip: "Replace the sample team names and totals before presenting.",
     demo: "leaderboard",
     demoLabel: "FINAL RESULTS",
     demoMeta: "COMPLETE",
@@ -390,9 +366,7 @@ function InstructionCard({ slide }: { slide: Slide }) {
     <article className="instruction-card">
       <header className="game-heading"><p>{slide.eyebrow}</p><h1>{slide.title}</h1></header>
       <section className="fact-block"><h2><span>★</span> Victory condition</h2><div className="victory-pill">{slide.victory}</div></section>
-      <section className="time-row"><h2><span>◷</span> Time</h2><div className="time-pill">{slide.time}</div></section>
       <section className="rules-block"><h2><span>▤</span> Rules</h2><ol>{slide.rules.map((rule, i) => <li key={rule}><b>{i + 1}</b><span>{rule}</span></li>)}</ol></section>
-      <aside className="tip-box"><b>○ &nbsp; Tip</b><span>{slide.tip}</span></aside>
     </article>
   );
 }
