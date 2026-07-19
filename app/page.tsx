@@ -372,7 +372,7 @@ function Demo({ kind }: { kind: DemoKind }) {
 function InstructionCard({ slide }: { slide: Slide }) {
   return (
     <article className="instruction-card">
-      <header className="game-heading"><div className="game-icon">{slide.icon}</div><div><p>{slide.eyebrow}</p><h1>{slide.title}</h1></div></header>
+      <header className="game-heading"><p>{slide.eyebrow}</p><h1>{slide.title}</h1></header>
       <section className="fact-block"><h2><span>★</span> Victory condition</h2><div className="victory-pill">{slide.victory}</div></section>
       <section className="time-row"><h2><span>◷</span> Time</h2><div className="time-pill">{slide.time}</div></section>
       <section className="rules-block"><h2><span>▤</span> Rules</h2><ol>{slide.rules.map((rule, i) => <li key={rule}><b>{i + 1}</b><span>{rule}</span></li>)}</ol></section>
