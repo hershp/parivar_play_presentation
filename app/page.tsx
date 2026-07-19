@@ -201,15 +201,13 @@ const slides: Slide[] = [
     number: "09",
     title: "Overall Scoring",
     shortTitle: "Scoring",
-    eyebrow: "TURN EVERY GAME INTO POINTS",
-    victory: "Highest total after 8 games",
+    eyebrow: "ONE FORMULA · EVERY GAME",
+    victory: "Highest cumulative total",
     rules: [
-      "First place earns 10 overall points",
-      "Second place earns 6 overall points",
-      "Third place earns 3 overall points",
-      "A perfect game earns a 2-point bonus",
-      "Record scores before opening the next game",
-      "Use one sudden-death challenge for ties",
+      "Every player starts with 100 points; winners add 50",
+      "Multiply for mandal diversity and a vadil in the trio",
+      "Repeated exact trios earn a shrinking multiplier",
+      "New mandal badges add a separate one-time 200 points",
     ],
     demo: "scoring",
     demoLabel: "POINTS SYSTEM",
@@ -340,6 +338,30 @@ function ScoringDemo() {
   return <div className="scoring-demo"><div className="points-row gold"><b>1ST</b><span>10</span></div><div className="points-row silver"><b>2ND</b><span>6</span></div><div className="points-row bronze"><b>3RD</b><span>3</span></div><div className="bonus-card"><b>PERFECT GAME</b><span>+2 BONUS</span></div><div className="score-equation">PLACEMENT + BONUS = TOTAL</div></div>;
 }
 
+function ScoringPage() {
+  const repeatSteps = [["1st", "1.0×"], ["2nd", "0.8×"], ["3rd", "0.6×"], ["4th", "0.4×"], ["5th", "0.2×"], ["6th+", "0×"]];
+  return (
+    <article className="scoring-page">
+      <header className="scoring-header">
+        <div><p>ONE FORMULA · EVERY GAME</p><h1>How scoring works</h1></div>
+        <div className="score-base"><span>COMPLETE</span><b>100</b><i>WIN</i><strong>+50</strong></div>
+      </header>
+
+      <div className="formula-ribbon"><b>(100 + 50 if you win)</b><span>×</span><b>Mandal mix</b><span>×</span><b>Vadil bonus</b><span>×</span><b>Repeat-trio factor</b></div>
+
+      <section className="score-factors">
+        <div className="factor-card diversity-card"><small>01 · MIX THE GROUP</small><h2>Mandal diversity</h2><div className="factor-options"><span><b>1</b> mandal <strong>1.0×</strong></span><span><b>2</b> mandals <strong>1.5×</strong></span><span className="best"><b>3</b> mandals <strong>2.5×</strong></span></div></div>
+        <div className="factor-card vadil-card"><small>02 · INCLUDE EVERY AGE</small><h2>Vadil in trio</h2><div className="vadil-bonus"><b>55+</b><span>At least one older player benefits all three</span><strong>1.15×</strong></div><p>One vadil triggers the bonus; it does not stack.</p></div>
+        <div className="factor-card repeat-card"><small>03 · KEEP MEETING PEOPLE</small><h2>Exact trio repeats</h2><div className="repeat-scale">{repeatSteps.map(([label, value]) => <span className={value === "0×" ? "zero" : ""} key={label}><b>{label}</b><strong>{value}</strong></span>)}</div><p>Only the same set of three is penalized—not recurring pairs.</p></div>
+      </section>
+
+      <section className="badge-strip"><div className="badge-points">+200</div><div><small>SEPARATE ONE-TIME LEDGER</small><h2>New mandal badge</h2><p>Each player earns 200 points the first time they play alongside someone from a new mandal—once per mandal, ever.</p></div></section>
+
+      <section className="worked-example"><div className="example-copy"><small>QUICK EXAMPLE</small><b>3 mandals · one vadil · first-time trio</b><span>Winner: 150 × 2.5 × 1.15 × 1.0</span><span>Others: 100 × 2.5 × 1.15 × 1.0</span></div><div className="example-score winner"><small>WINNER</small><b>431.25</b><span>before badges</span></div><div className="example-score"><small>EACH OTHER PLAYER</small><b>287.5</b><span>before badges</span></div></section>
+    </article>
+  );
+}
+
 function LeaderboardDemo() {
   const teams = [["TEAM ORBIT", 68], ["TEAM NOVA", 61], ["TEAM COMET", 54], ["TEAM PIXEL", 47]] as const;
   return <div className="leader-demo"><div className="trophy">★</div><h3>CHAMPIONS</h3>{teams.map(([name, score], i) => <div className="leader-row" style={{ "--i": i } as React.CSSProperties} key={name}><b>{i + 1}</b><span>{name}</span><strong>{score}</strong></div>)}</div>;
@@ -421,10 +443,9 @@ export default function Home() {
         <button className="fullscreen" onClick={() => document.documentElement.requestFullscreen?.()} aria-label="Enter full screen">Full screen ⛶</button>
       </nav>
 
-      <div className="slide-frame" aria-live="polite">
+      <div className={`slide-frame${slide.demo === "scoring" ? " scoring-slide" : ""}`} aria-live="polite">
         <div className="decor decor-top"/><div className="decor decor-right"/><div className="decor decor-bottom"/><div className="decor decor-dot"/>
-        <InstructionCard slide={slide} />
-        <div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div>
+        {slide.demo === "scoring" ? <ScoringPage /> : <><InstructionCard slide={slide} /><div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div></>}
         <span className="page-number">{slide.number}</span>
       </div>
 
