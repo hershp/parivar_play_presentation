@@ -34,7 +34,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     number: "00",
-    title: "Game Night",
+    title: "Parivar Play",
     shortTitle: "Welcome",
     icon: "PLAY",
     eyebrow: "8 GAMES · ONE LEADERBOARD",
@@ -454,7 +454,7 @@ export default function Home() {
   return (
     <main className="presentation-shell" onTouchStart={(e) => { touchStart.current = e.changedTouches[0].clientX; }} onTouchEnd={(e) => { if (touchStart.current === null) return; const delta = e.changedTouches[0].clientX - touchStart.current; if (Math.abs(delta) > 60) go(index + (delta < 0 ? 1 : -1)); touchStart.current = null; }}>
       <nav className="topbar" aria-label="Presentation controls">
-        <div className="brand"><span>G</span><b>Game Night</b></div>
+        <div className="brand"><span>P</span><b>Parivar Play</b></div>
         <div className="slide-picker"><label htmlFor="slide-select">Jump to</label><select id="slide-select" value={index} onChange={(e) => go(Number(e.target.value))}>{slides.map((item, i) => <option value={i} key={item.number}>{item.number} — {item.shortTitle}</option>)}</select></div>
         <button className="fullscreen" onClick={() => document.documentElement.requestFullscreen?.()} aria-label="Enter full screen">Full screen ⛶</button>
       </nav>
