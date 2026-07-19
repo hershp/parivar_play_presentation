@@ -19,7 +19,6 @@ type Slide = {
   number: string;
   title: string;
   shortTitle: string;
-  icon: string;
   eyebrow: string;
   victory: string;
   time: string;
@@ -36,7 +35,6 @@ const slides: Slide[] = [
     number: "00",
     title: "Parivar Play",
     shortTitle: "Welcome",
-    icon: "PLAY",
     eyebrow: "8 GAMES · ONE LEADERBOARD",
     victory: "Play bold. Finish on top.",
     time: "60–90 Minutes",
@@ -57,7 +55,6 @@ const slides: Slide[] = [
     number: "01",
     title: "Word Search",
     shortTitle: "Word Search",
-    icon: "WORD",
     eyebrow: "FIND THE HIDDEN WORDS",
     victory: "First to find all 10 wins",
     time: "No Time Limit",
@@ -78,7 +75,6 @@ const slides: Slide[] = [
     number: "02",
     title: "Number Flow",
     shortTitle: "Number Flow",
-    icon: "FLOW",
     eyebrow: "CONNECT EVERY NUMBER",
     victory: "First to finish 3 rounds",
     time: "Best of Five",
@@ -100,7 +96,6 @@ const slides: Slide[] = [
     number: "03",
     title: "Battle Boxes",
     shortTitle: "Battle Boxes",
-    icon: "BOX",
     eyebrow: "DRAW LINES · CLAIM BOXES",
     victory: "Most boxes wins",
     time: "3 Players",
@@ -122,7 +117,6 @@ const slides: Slide[] = [
     number: "04",
     title: "Minesweeper",
     shortTitle: "Minesweeper",
-    icon: "MINE",
     eyebrow: "BE THE LAST PLAYER STANDING",
     victory: "First to win 2 rounds",
     time: "3 Players",
@@ -144,7 +138,6 @@ const slides: Slide[] = [
     number: "05",
     title: "Codebreaker",
     shortTitle: "Codebreaker",
-    icon: "CODE",
     eyebrow: "CRACK THE FOUR-DIGIT CODE",
     victory: "First to win 2 rounds",
     time: "Real-Time",
@@ -166,7 +159,6 @@ const slides: Slide[] = [
     number: "06",
     title: "Crossword",
     shortTitle: "Crossword",
-    icon: "CLUE",
     eyebrow: "SOLVE FROM THE CLUES",
     victory: "First correct grid wins",
     time: "10–15 Minutes",
@@ -187,7 +179,6 @@ const slides: Slide[] = [
     number: "07",
     title: "Samay Sparsh",
     shortTitle: "Samay Sparsh",
-    icon: "TIME",
     eyebrow: "CATCH THE TARGET TIME",
     victory: "Closest player wins",
     time: "5 Rounds",
@@ -209,7 +200,6 @@ const slides: Slide[] = [
     number: "08",
     title: "Haaji Naaji",
     shortTitle: "Haaji Naaji",
-    icon: "PICK",
     eyebrow: "SHARE, STEAL, BLUFF",
     victory: "Most treasure wins",
     time: "4 Rounds",
@@ -231,7 +221,6 @@ const slides: Slide[] = [
     number: "09",
     title: "Overall Scoring",
     shortTitle: "Scoring",
-    icon: "PTS",
     eyebrow: "TURN EVERY GAME INTO POINTS",
     victory: "Highest total after 8 games",
     time: "Update Each Round",
@@ -252,7 +241,6 @@ const slides: Slide[] = [
     number: "10",
     title: "Final Leaderboard",
     shortTitle: "Leaderboard",
-    icon: "WIN",
     eyebrow: "THE FINAL COUNT",
     victory: "Crown the champion",
     time: "After Game 8",

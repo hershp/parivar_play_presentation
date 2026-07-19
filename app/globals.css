@@ -36,7 +36,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .decor-dot { width: 56px; height: 56px; border-radius: 50%; right: 58px; bottom: 118px; }
 
 .instruction-card { position: relative; z-index: 2; height: 100%; min-height: 0; padding: 4.2% 5.2% 3.4%; border: 1px solid var(--peach); border-radius: 28px; background: rgba(255,255,255,.96); box-shadow: 0 14px 26px #7f5b4b17; display: flex; flex-direction: column; }
-.game-heading { margin-bottom: 2%; text-align: left; }
+.game-heading { width: 100%; margin: 0 0 2%; padding: 0; text-align: left; }
 .game-heading p { margin: 0 0 4px; color: var(--purple); font-weight: 900; letter-spacing: .09em; font-size: clamp(8px, .72vw, 14px); }
 .game-heading h1 { margin: 0; color: var(--navy); text-transform: uppercase; letter-spacing: -.02em; line-height: .95; font-size: clamp(27px, 3.15vw, 54px); font-weight: 900; }
 .instruction-card h2 { display: flex; align-items: center; gap: 8px; margin: 0; text-transform: uppercase; color: #544296; letter-spacing: .04em; font-size: clamp(10px, .88vw, 16px); }
