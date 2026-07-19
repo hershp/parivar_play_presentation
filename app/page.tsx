@@ -92,7 +92,7 @@ const slides: Slide[] = [
     ],
     tip: "The animated path demonstrates direction without revealing a puzzle.",
     demo: "numberflow",
-    demoLabel: "LIVE PUZZLE",
+    demoLabel: "DRAW 1 → 8 · FILL EVERY CELL",
     demoMeta: "ROUND 2 / 5",
     link: "https://zip-race-trial.onrender.com/",
   },
@@ -305,8 +305,36 @@ function WordSearchDemo() {
 }
 
 function NumberFlowDemo() {
-  const nums = [1, 2, 3, 4, 12, 11, 10, 5, 13, 14, 9, 6, 16, 15, 8, 7];
-  return <div className="flow-board">{nums.map((n, i) => <span style={{ "--i": i } as React.CSSProperties} key={n}>{n}</span>)}<div className="flow-line" /></div>;
+  const path = [0, 1, 2, 3, 4, 5, 11, 10, 9, 8, 7, 6, 12, 13, 14, 15, 16, 17, 23, 22, 21, 20, 19, 18, 24, 25, 26, 27, 28, 29, 35, 34, 33, 32, 31, 30];
+  const waypointSteps: Record<number, number> = { 0: 1, 5: 2, 9: 3, 13: 4, 18: 5, 23: 6, 28: 7, 35: 8 };
+  const direction = (from: number, to: number) => {
+    const delta = to - from;
+    if (delta === 1) return "right";
+    if (delta === -1) return "left";
+    if (delta === 6) return "down";
+    return "up";
+  };
+
+  return (
+    <div className="flow-demo">
+      <div className="flow-board" aria-label="Animated number path puzzle">
+        {Array.from({ length: 36 }, (_, cell) => {
+          const step = path.indexOf(cell);
+          const neighbors = [path[step - 1], path[step + 1]].filter((value): value is number => value !== undefined);
+          return (
+            <span className="flow-cell" style={{ "--step": step } as React.CSSProperties} key={cell}>
+              <i className="flow-stroke">
+                {neighbors.map((neighbor) => <em className={`flow-arm ${direction(cell, neighbor)}`} key={neighbor} />)}
+                <em className="flow-center" />
+              </i>
+              {waypointSteps[step] && <b>{waypointSteps[step]}</b>}
+            </span>
+          );
+        })}
+      </div>
+      <div className="flow-status"><b>1</b><span>ONE CONTINUOUS PATH</span><b>8</b></div>
+    </div>
+  );
 }
 
 function BoxesDemo() {
