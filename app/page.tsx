@@ -240,9 +240,9 @@ const slides = slideLibrary.filter((slide) => slide.active !== false);
 const wordGrid = [
   "A", "A", "R", "T", "I", "K", "M", "S", "O", "U",
   "D", "A", "R", "S", "H", "A", "N", "E", "K", "L",
-  "B", "H", "A", "K", "T", "I", "G", "U", "R", "U",
-  "S", "A", "T", "S", "A", "N", "G", "P", "E", "A",
-  "D", "H", "A", "R", "M", "A", "T", "C", "E", "E",
+  "B", "H", "R", "K", "T", "I", "G", "U", "R", "U",
+  "S", "A", "T", "T", "A", "N", "G", "P", "E", "A",
+  "D", "H", "A", "R", "I", "A", "T", "C", "E", "E",
   "M", "O", "K", "S", "H", "A", "M", "R", "T", "I",
 ];
 
@@ -260,12 +260,21 @@ function OverviewDemo() {
 }
 
 function WordSearchDemo() {
+  const darshanCells = [10, 11, 12, 13, 14, 15, 16];
+  const aartiCells = [0, 11, 22, 33, 44];
+
   return (
     <div className="word-demo">
       <div className="word-grid">
-          {wordGrid.map((letter, i) => <span className={[10, 11, 12, 13, 14, 15, 16].includes(i) ? "found" : ""} key={i}>{letter}</span>)}
+          {wordGrid.map((letter, i) => {
+            const classes = [
+              darshanCells.includes(i) ? "found" : "",
+              aartiCells.includes(i) ? "diagonal-found" : "",
+            ].filter(Boolean).join(" ");
+            return <span className={classes} key={i}>{letter}</span>;
+          })}
       </div>
-      <div className="found-words"><b>FOUND</b><span>AARTI</span><span className="pop-word">DARSHAN ✓</span><span>BHAKTI</span></div>
+      <div className="found-words"><b>FOUND</b><span className="pop-word diagonal-word">AARTI ↘</span><span className="pop-word">DARSHAN →</span><span>BHAKTI</span></div>
     </div>
   );
 }
