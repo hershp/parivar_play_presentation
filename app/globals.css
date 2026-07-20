@@ -109,19 +109,22 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .flow-status span { position: relative; padding-top: 7px; border-top: 3px solid #f1c4ae; }
 
 /* Boxes */
-.boxes-board { position: relative; width: 82%; aspect-ratio: 1; margin: 6% auto 0; }
+.boxes-board { position: relative; width: 78%; aspect-ratio: 1; margin: 14% auto 0; }
+.box-instruction { position: absolute; left: 0; right: 0; top: -15%; color: var(--purple); text-align: center; font-size: clamp(8px, .62vw, 11px); font-weight: 900; letter-spacing: .08em; }
 .dot { position: absolute; width: 9px; height: 9px; margin: -4px; border-radius: 50%; background: var(--navy); }
 .dot:nth-child(4n + 1) { left: 5%; }.dot:nth-child(4n + 2) { left: 35%; }.dot:nth-child(4n + 3) { left: 65%; }.dot:nth-child(4n + 4) { left: 95%; }
 .dot:nth-child(-n + 4) { top: 5%; }.dot:nth-child(n + 5):nth-child(-n + 8) { top: 35%; }.dot:nth-child(n + 9):nth-child(-n + 12) { top: 65%; }.dot:nth-child(n + 13) { top: 95%; }
-.draw-line { position: absolute; background: var(--purple); border-radius: 4px; transform-origin: left; transform: scaleX(0); animation: line-draw .32s calc(var(--i) * .25s) forwards; }
-.line-0,.line-1,.line-2,.line-3,.line-4,.line-5 { width: 30%; height: 4px; }
-.line-0 { left: 5%; top: 5%; }.line-1 { left: 35%; top: 5%; }.line-2 { left: 5%; top: 35%; }.line-3 { left: 35%; top: 35%; }.line-4 { left: 35%; top: 65%; }.line-5 { left: 65%; top: 65%; }
-.line-6,.line-7,.line-8,.line-9 { width: 30%; height: 4px; transform: rotate(90deg) scaleX(0); }
-.line-6 { left: 5%; top: 5%; }.line-7 { left: 35%; top: 5%; }.line-8 { left: 65%; top: 35%; }.line-9 { left: 95%; top: 35%; }
-.claimed-box { position: absolute; display: grid; place-items: center; width: 30%; height: 30%; opacity: 0; color: #fff; font-weight: 900; animation: claim .35s 2.6s forwards; }
-.box-a { left: 5%; top: 5%; background: #7556f4; }.box-b { left: 65%; top: 35%; background: #ff826d; animation-delay: 2.9s; }
-.mini-scores { position: absolute; left: 0; right: 0; bottom: -12%; display: flex; justify-content: center; gap: 8px; font-size: 10px; }
-.mini-scores b { padding: 5px 8px; border-radius: 7px; background: #fff; color: var(--navy); }
+.box-edge { position: absolute; z-index: 2; width: 30%; height: 5px; border-radius: 5px; background: #9a84da; transform-origin: left center; }
+.edge-top { left: 35%; top: 35%; }
+.edge-left { left: 35%; top: 35%; transform: rotate(90deg); }
+.edge-right { left: 65%; top: 35%; transform: rotate(90deg); }
+.edge-fourth { left: 35%; top: 65%; background: #ff6b62; transform: scaleX(0); animation: line-draw .55s 1s forwards; box-shadow: 0 0 10px #ff6b6270; }
+.claimed-box { position: absolute; z-index: 1; left: 35%; top: 35%; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 30%; height: 30%; opacity: 0; color: #fff; background: linear-gradient(145deg,#7556f4,#5634de); font-weight: 900; animation: claim .42s 1.55s forwards; }
+.claimed-box b { font-size: clamp(13px, 1.05vw, 18px); }.claimed-box small { margin-top: 3px; color: #ffe28d; font-size: clamp(9px, .72vw, 12px); }
+.mini-scores { position: absolute; left: -8%; right: -8%; bottom: -11%; display: flex; justify-content: center; gap: 6px; font-size: clamp(7px, .58vw, 10px); }
+.mini-scores b { min-width: 28%; padding: 5px 6px; border-radius: 7px; background: #fff; color: var(--navy); text-align: center; }
+.score-winner { border: 1px solid #d8c8ff; }.score-winner span { display: inline-block; animation: old-score .25s 1.65s forwards; }.score-winner strong { display: inline-block; max-width: 0; opacity: 0; color: var(--purple); animation: new-score .35s 1.8s forwards; }
+.bonus-turn { position: absolute; left: -12%; right: -12%; bottom: -24%; padding: 6px; border-radius: 7px; background: #e8f8ed; color: #16883d; text-align: center; font-size: clamp(7px, .55vw, 10px); font-weight: 900; opacity: 0; animation: pop-word .4s 2.05s forwards; }
 
 /* Minesweeper */
 .mine-wrap { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
@@ -254,6 +257,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes flow-trace { to { opacity: 1; transform: scale(1); } }
 @keyframes line-draw { to { transform: scaleX(1); } }
 @keyframes claim { to { opacity: .82; } }
+@keyframes old-score { to { max-width: 0; opacity: 0; transform: translateX(-5px); } }
+@keyframes new-score { to { max-width: 24px; opacity: 1; transform: translateX(2px); } }
 @keyframes reveal { from { color: transparent; background: #8c7ac6; } to { color: var(--purple); background: #fff; } }
 @keyframes mine-hit { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.25); } 100% { transform: scale(1); opacity: 1; } }
 @keyframes guess-in { to { opacity: 1; transform: translateX(0); } }

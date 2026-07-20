@@ -302,10 +302,13 @@ function NumberFlowDemo() {
 function BoxesDemo() {
   return (
     <div className="boxes-board">
+      <div className="box-instruction">DRAW THE 4TH SIDE</div>
       {Array.from({ length: 16 }, (_, i) => <i className="dot" key={`d${i}`} />)}
-      {Array.from({ length: 10 }, (_, i) => <i className={`draw-line line-${i}`} style={{ "--i": i } as React.CSSProperties} key={`l${i}`} />)}
-      <span className="claimed-box box-a">P1</span><span className="claimed-box box-b">P2</span>
-      <div className="mini-scores"><b>P1&nbsp; 3</b><b>P2&nbsp; 2</b><b>P3&nbsp; 1</b></div>
+      <i className="box-edge edge-top"/><i className="box-edge edge-left"/><i className="box-edge edge-right"/>
+      <i className="box-edge edge-fourth"/>
+      <span className="claimed-box focus-box"><b>P1</b><small>+1</small></span>
+      <div className="mini-scores"><b className="score-winner">P1&nbsp; <span>2</span><strong>3</strong></b><b>P2&nbsp; 2</b><b>P3&nbsp; 1</b></div>
+      <div className="bonus-turn">BOX CLAIMED · P1 PLAYS AGAIN</div>
     </div>
   );
 }
