@@ -340,54 +340,44 @@ function ScoringDemo() {
 }
 
 function ScoringPage() {
-  const repeatSteps = [["1st", "1.0×"], ["2nd", "0.8×"], ["3rd", "0.6×"], ["4th", "0.4×"], ["5th", "0.2×"], ["6th+", "0×"]];
   return (
     <article className="scoring-page">
       <header className="scoring-header">
         <div><p>PARIVAR PLAY</p><h1>How scoring works</h1></div>
-        <p className="scoring-intro"><strong>Start with points.</strong> Apply the three multipliers. Then add any badges from the separate badge ledger.</p>
+        <p className="scoring-intro"><strong>Keep it simple.</strong> Play every game, mix with new people, and avoid repeating the same trio.</p>
       </header>
 
       <section className="scoring-pillars" aria-label="Four scoring pillars">
         <section className="scoring-pillar">
-          <div className="pillar-heading"><span>1</span><div><h2>Base points &amp; winning</h2><p>Everyone earns points for completing the game.</p></div></div>
-          <div className="base-points-grid">
-            <div><small>EVERY PLAYER</small><strong>100 <em>pts</em></strong><p>Your starting score</p></div>
-            <div className="winner-points"><small>WINNER</small><strong>+50 <em>pts</em></strong><p>Added before multipliers</p></div>
-          </div>
-          <p className="base-summary">Winner starts at <strong>150 points</strong>. Everyone else starts at <strong>100 points</strong>.</p>
+          <div className="pillar-heading"><span>1</span><div><h2>Participate</h2><p>Complete the game and earn your starting points.</p></div></div>
+          <div className="simple-score"><strong>100</strong><span>POINTS</span></div>
+          <p className="simple-explanation">Every player receives 100 points for participating.</p>
         </section>
 
         <section className="scoring-pillar">
-          <div className="pillar-heading"><span>2</span><div><h2>Mandal diversity multiplier</h2><p>Mixing mandals in your trio multiplies everyone&apos;s score.</p></div></div>
-          <div className="mandal-multipliers">
-            <div><strong>1.0×</strong><span>1 mandal</span></div>
-            <div><strong>1.5×</strong><span>2 mandals</span></div>
-            <div className="best"><strong>2.5×</strong><span>3 mandals</span></div>
-          </div>
-          <p className="pillar-note"><strong>Plainly:</strong> the more different mandals represented in the three-player team, the bigger the multiplier.</p>
+          <div className="pillar-heading"><span>2</span><div><h2>Win the game</h2><p>Winners receive an extra points bonus.</p></div></div>
+          <div className="simple-score winner"><strong>+50</strong><span>POINTS</span></div>
+          <p className="simple-explanation">Win and add 50 points to your participation score.</p>
         </section>
 
         <section className="scoring-pillar modifier-pillar">
-          <div className="pillar-heading"><span>3</span><div><h2>Team modifiers</h2><p>One rewards generations; the other encourages new trios.</p></div></div>
-          <div className="team-modifiers">
-            <div className="vadil-modifier"><small>VADIL BONUS</small><strong>1.15×</strong><p>Anyone age 55+ benefits all three players. <b>It does not stack.</b></p></div>
-            <div className="repeat-modifier"><small>REPEAT-TRIO MULTIPLIER</small><p>The exact same three players earn less each repeat.</p><div className="repeat-scale">{repeatSteps.map(([label, value]) => <span className={value === "0×" ? "zero" : ""} key={label}><strong>{value}</strong><b>{label}</b></span>)}</div></div>
+          <div className="pillar-heading"><span>3</span><div><h2>Earn multipliers</h2><p>Build a team that connects the Parivar.</p></div></div>
+          <div className="simple-multipliers">
+            <div><strong>NEW PERSON</strong><span>Play with someone new to increase your score.</span></div>
+            <div><strong>VADIL</strong><span>Include a Vadil in your trio to increase everyone&apos;s score.</span></div>
           </div>
         </section>
 
         <section className="scoring-pillar badge-pillar">
-          <div className="pillar-heading"><span>4</span><div><h2>Mandal badges</h2><p>A separate one-time reward for meeting new mandals.</p></div></div>
-          <div className="badge-content">
-            <div className="badge-points"><span>★</span><strong>+200</strong><small>BADGE POINTS</small></div>
-            <div><h3>Earn a badge for each new mandal</h3><p>Each player earns <strong>+200 points once</strong> for every mandal they encounter for the first time.</p><p className="badge-ledger">Badges are tracked separately and added after the game-score calculation.</p></div>
-          </div>
+          <div className="pillar-heading"><span>4</span><div><h2>Mix up your trio</h2><p>Playing with the same people reduces your score.</p></div></div>
+          <div className="repeat-warning"><strong>0</strong><span>POINTS AFTER<br/>5 REPEATS</span></div>
+          <p className="simple-explanation">The exact same trio earns fewer points each time and reaches zero after five repeats.</p>
         </section>
       </section>
 
       <footer className="scoring-footer">
-        <div className="score-formula"><small>GAME SCORE</small><strong>(Base + Win Bonus) × Mandal × Vadil × Repeat Trio</strong></div>
-        <div className="worked-example"><small>EXAMPLE</small><div>Winner · 3 mandals · Vadil · first-time trio<br/><strong>150 × 2.5 × 1.15 × 1.0 = 431.25</strong> before badges</div></div>
+        <div className="score-formula"><small>START HERE</small><strong>Participate = 100 points · Win = +50 points</strong></div>
+        <div className="worked-example"><small>THEN</small><div>New person or Vadil?<br/><strong>Your score gets multiplied.</strong></div></div>
       </footer>
     </article>
   );
