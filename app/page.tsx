@@ -16,6 +16,7 @@ type DemoKind =
   | "leaderboard";
 
 type Slide = {
+  active?: boolean;
   number: string;
   title: string;
   shortTitle: string;
@@ -28,7 +29,7 @@ type Slide = {
   link?: string;
 };
 
-const slides: Slide[] = [
+const slideLibrary: Slide[] = [
   {
     number: "00",
     title: "Parivar Play",
@@ -214,6 +215,7 @@ const slides: Slide[] = [
     demoMeta: "8 GAMES",
   },
   {
+    active: false,
     number: "10",
     title: "Final Leaderboard",
     shortTitle: "Leaderboard",
@@ -232,6 +234,8 @@ const slides: Slide[] = [
     demoMeta: "COMPLETE",
   },
 ];
+
+const slides = slideLibrary.filter((slide) => slide.active !== false);
 
 const wordGrid = [
   "A", "A", "R", "T", "I", "K", "M", "S", "O", "U",
