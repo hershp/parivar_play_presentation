@@ -335,7 +335,8 @@ function CrosswordDemo() {
 }
 
 function SamayDemo() {
-  return <div className="samay-demo"><div className="target-time"><small>TARGET</small><b>10.00s</b></div><div className="timer-ring"><i /><span>9.84</span></div><div className="time-results"><span>P1&nbsp; 9.84</span><span className="winner">P2&nbsp; 10.06 ★</span><span>P3&nbsp; 10.41</span></div></div>;
+  const results = [["P1", "9.84s", "0.16 early"], ["P2", "10.06s", "0.06 late"], ["P3", "10.41s", "0.41 late"]];
+  return <div className="samay-demo"><div className="target-time"><small>TARGET TIME</small><b>10.00s</b></div><div className="samay-play"><div className="timer-ring"><i/><span className="timer-running">•••</span><span className="timer-stopped">9.84</span></div><div className="stop-demo-button" role="img" aria-label="Player presses the stop button"><span>STOP</span></div></div><div className="time-results">{results.map(([player,time,difference],i) => <div className={player === "P2" ? "winner" : ""} style={{ "--delay": `${1.9 + i * 0.2}s` } as React.CSSProperties} key={player}><b>{player}</b><strong>{time}</strong><small>{difference}</small>{player === "P2" && <em>★ CLOSEST</em>}</div>)}</div><div className="round-winner">★ P2 WINS THE ROUND</div></div>;
 }
 
 function HaajiDemo() {
