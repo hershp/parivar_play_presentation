@@ -325,8 +325,13 @@ function CodebreakerDemo() {
 }
 
 function CrosswordDemo() {
-  const dark = new Set([3, 4, 8, 13, 18, 20, 21]);
-  return <div className="cross-demo"><div className="cross-grid">{Array.from({ length: 25 }, (_, i) => <span className={`${dark.has(i) ? "black" : ""} ${[5,6,7,9].includes(i) ? "active" : ""}`} key={i}>{[5,6,7,9].includes(i) ? ["G","U","R","U"][[5,6,7,9].indexOf(i)] : ""}</span>)}</div><div className="clue-card"><b>6 ACROSS</b><p>Spiritual mentor</p><span>GURU ✓</span></div></div>;
+  const dark = new Set([4, 9, 10, 14, 20, 21]);
+  const answerCells = [5, 6, 7, 8];
+  const answer = ["G", "U", "R", "U"];
+  return <div className="cross-demo"><div className="cross-grid">{Array.from({ length: 25 }, (_, i) => {
+    const answerIndex = answerCells.indexOf(i);
+    return <span className={`${dark.has(i) ? "black" : ""} ${answerIndex >= 0 ? "active" : ""} ${i === 5 ? "answer-start" : ""}`} style={answerIndex >= 0 ? { "--delay": `${0.45 + answerIndex * 0.28}s` } as React.CSSProperties : undefined} key={i}>{answerIndex >= 0 ? answer[answerIndex] : ""}</span>;
+  })}</div><div className="clue-card"><b>6 ACROSS · 4 LETTERS</b><p>A teacher or spiritual guide</p><span>GURU ✓</span></div></div>;
 }
 
 function SamayDemo() {

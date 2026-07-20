@@ -147,10 +147,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Crossword */
 .cross-demo { height: 100%; display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 8%; }
 .cross-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 2px solid var(--navy); }
-.cross-grid span { aspect-ratio: 1; display: grid; place-items: center; border: .5px solid var(--navy); background: #fff; color: var(--navy); font-weight: 900; font-size: 12px; }
-.cross-grid .black { background: var(--navy); }.cross-grid .active { animation: cross-letter .4s calc(var(--i, 1) * .15s) both; background: #efe8ff; }
+.cross-grid span { position: relative; aspect-ratio: 1; display: grid; place-items: center; border: .5px solid var(--navy); background: #fff; color: var(--navy); font-weight: 900; font-size: 12px; }
+.cross-grid .black { background: var(--navy); }.cross-grid .active { color: transparent; background: #efe8ff; animation: cross-letter .38s var(--delay) both; }
+.cross-grid .answer-start::before { content: "6"; position: absolute; left: 2px; top: 1px; color: var(--purple); font-size: 6px; line-height: 1; }
 .clue-card { padding: 10px; border-radius: 10px; background: #fff; color: var(--navy); font-size: 10px; box-shadow: 0 8px 18px #3e2c6c14; }
-.clue-card b { color: var(--purple); }.clue-card p { margin: 8px 0; }.clue-card span { color: var(--green); font-weight: 900; }
+.clue-card b { color: var(--purple); }.clue-card p { margin: 8px 0; line-height: 1.3; }.clue-card span { display: inline-block; padding: 4px 7px; border-radius: 6px; background: #e7f9ec; color: var(--green); font-weight: 900; opacity: 0; animation: pop-word .4s 1.65s forwards; }
 
 /* Samay */
 .samay-demo { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5%; }
