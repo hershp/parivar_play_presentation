@@ -263,7 +263,7 @@ function WordSearchDemo() {
   return (
     <div className="word-demo">
       <div className="word-grid">
-        {wordGrid.map((letter, i) => <span className={[11, 12, 13, 14, 15, 16].includes(i) ? "found" : ""} key={i}>{letter}</span>)}
+          {wordGrid.map((letter, i) => <span className={[10, 11, 12, 13, 14, 15, 16].includes(i) ? "found" : ""} key={i}>{letter}</span>)}
       </div>
       <div className="found-words"><b>FOUND</b><span>AARTI</span><span className="pop-word">DARSHAN ✓</span><span>BHAKTI</span></div>
     </div>
