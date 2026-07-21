@@ -332,13 +332,17 @@ function BoxesDemo() {
 
 function MinesweeperDemo() {
   const picks: Record<number, { player: string; result: string; value: string; delay: string }> = {
-    6: { player: "P1", result: "safe-pick", value: "1", delay: ".75s" },
-    12: { player: "P2", result: "mine-pick", value: "✹", delay: "1.85s" },
+    0: { player: "P1", result: "safe-pick", value: "", delay: ".65s" },
+    12: { player: "P2", result: "mine-pick", value: "✹", delay: "1.95s" },
     18: { player: "P3", result: "safe-pick", value: "2", delay: "3s" },
     4: { player: "P1", result: "mine-pick", value: "✹", delay: "4.15s" },
   };
+  const floodValues: Record<number, string> = {
+    1: "", 2: "", 3: "1", 5: "", 6: "1", 7: "1", 10: "", 11: "1",
+    15: "", 16: "1", 17: "2", 20: "", 21: "", 22: "1",
+  };
   const messages = [
-    ["P1", "PICKS SAFE · NUMBER SHOWS NEARBY MINES", ".35s"],
+    ["P1", "PICKS EMPTY · SAFE AREA OPENS AUTOMATICALLY", ".25s"],
     ["P2", "HITS A MINE · ELIMINATED", "1.55s"],
     ["P3", "PICKS SAFE · STAYS IN", "2.7s"],
     ["P1", "HITS A MINE · ELIMINATED", "3.85s"],
@@ -349,7 +353,10 @@ function MinesweeperDemo() {
       <div className="mine-turn-banner">{messages.map(([player, text, delay]) => <span style={{ "--delay": delay } as React.CSSProperties} key={text + player}><b>{player}</b> {text}</span>)}</div>
       <div className="mine-board">{Array.from({ length: 25 }, (_, i) => {
         const pick = picks[i];
-        return <span className={`mine-cell${pick ? ` ${pick.result}` : ""}`} data-player={pick?.player} style={pick ? { "--delay": pick.delay } as React.CSSProperties : undefined} key={i}>{pick?.value}</span>;
+        const isFloodCell = Object.hasOwn(floodValues, i);
+        const floodOrder = Object.keys(floodValues).indexOf(String(i));
+        const style = pick ? { "--delay": pick.delay } : isFloodCell ? { "--delay": `${.9 + floodOrder * .035}s` } : undefined;
+        return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} data-player={pick?.player} style={style as React.CSSProperties | undefined} key={i}>{pick?.value ?? floodValues[i]}</span>;
       })}</div>
       <div className="mine-players">
         <div className="player-one"><b>P1</b><small>READY</small><strong>ELIMINATED</strong></div>

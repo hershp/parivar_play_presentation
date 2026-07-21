@@ -144,6 +144,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .mine-cell { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-radius: 7px; background: #8c7ac6; color: transparent; box-shadow: inset 0 -3px #6b58a6; font-weight: 900; font-size: clamp(11px, .95vw, 17px); }
 .mine-cell[data-player]::after { content: attr(data-player) " TAP"; position: absolute; z-index: 3; left: 50%; top: 50%; min-width: 42px; padding: 3px 5px; border-radius: 6px; background: var(--navy); color: #fff; text-align: center; font-size: 6px; letter-spacing: .04em; opacity: 0; transform: translate(-50%,-115%) scale(.75); animation: picker-tap .7s var(--delay) both; }
 .mine-cell.safe-pick { animation: safe-cell .4s calc(var(--delay) + .28s) both; }
+.mine-cell.flood-cell { animation: safe-cell .32s var(--delay) both; }
 .mine-cell.mine-pick { animation: mine-cell-hit .5s calc(var(--delay) + .28s) both; }
 .mine-players { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; width: 100%; }
 .mine-players > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 3px; border: 1px solid #ded4f7; border-radius: 8px; background: #fff; color: var(--navy); font-size: clamp(7px, .55vw, 10px); }
