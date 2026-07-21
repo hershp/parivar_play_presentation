@@ -113,21 +113,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Boxes */
 .boxes-board { position: relative; width: 78%; aspect-ratio: 1; margin: 14% auto 0; }
-.box-instruction { position: absolute; left: 0; right: 0; top: -15%; color: var(--purple); text-align: center; font-size: clamp(8px, .62vw, 11px); font-weight: 900; letter-spacing: .08em; }
+.box-instruction { position: absolute; left: -8%; right: -8%; top: -15%; display: flex; align-items: center; justify-content: center; gap: 4px; color: var(--purple); text-align: center; font-size: clamp(7px, .56vw, 10px); font-weight: 900; letter-spacing: .05em; }
+.box-instruction span { width: 7px; height: 7px; margin-left: 4px; border-radius: 50%; }
+.box-instruction .p1-dot { background: #6d48ff; }.box-instruction .p2-dot { background: #28a866; }.box-instruction .p3-dot { background: #f47a32; }
 .dot { position: absolute; width: 9px; height: 9px; margin: -4px; border-radius: 50%; background: var(--navy); }
 .dot:nth-child(4n + 1) { left: 5%; }.dot:nth-child(4n + 2) { left: 35%; }.dot:nth-child(4n + 3) { left: 65%; }.dot:nth-child(4n + 4) { left: 95%; }
 .dot:nth-child(-n + 4) { top: 5%; }.dot:nth-child(n + 5):nth-child(-n + 8) { top: 35%; }.dot:nth-child(n + 9):nth-child(-n + 12) { top: 65%; }.dot:nth-child(n + 13) { top: 95%; }
-.box-edge { position: absolute; z-index: 2; width: 30%; height: 5px; border-radius: 5px; background: #9a84da; transform-origin: left center; }
+.box-edge { position: absolute; z-index: 2; width: 30%; height: 5px; border-radius: 5px; transform-origin: left center; }
+.edge-p1 { background: #6d48ff; }.edge-p2 { background: #28a866; }
 .edge-top { left: 35%; top: 35%; }
 .edge-left { left: 35%; top: 35%; transform: rotate(90deg); }
 .edge-right { left: 65%; top: 35%; transform: rotate(90deg); }
-.edge-fourth { left: 35%; top: 65%; background: #ff6b62; transform: scaleX(0); animation: line-draw .55s 1s forwards; box-shadow: 0 0 10px #ff6b6270; }
-.claimed-box { position: absolute; z-index: 1; left: 35%; top: 35%; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 30%; height: 30%; opacity: 0; color: #fff; background: linear-gradient(145deg,#7556f4,#5634de); font-weight: 900; animation: claim .42s 1.55s forwards; }
+.edge-fourth { left: 35%; top: 65%; background: #f47a32; transform: scaleX(0); animation: line-draw .55s 1s forwards; box-shadow: 0 0 10px #f47a3270; }
+.claimed-box { position: absolute; z-index: 1; left: 35%; top: 35%; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 30%; height: 30%; opacity: 0; color: #fff; background: linear-gradient(145deg,#ff994c,#e7611e); font-weight: 900; animation: claim .42s 1.55s forwards; }
 .claimed-box b { font-size: clamp(13px, 1.05vw, 18px); }.claimed-box small { margin-top: 3px; color: #ffe28d; font-size: clamp(9px, .72vw, 12px); }
 .mini-scores { position: absolute; left: -8%; right: -8%; bottom: -11%; display: flex; justify-content: center; gap: 6px; font-size: clamp(7px, .58vw, 10px); }
 .mini-scores b { min-width: 28%; padding: 5px 6px; border-radius: 7px; background: #fff; color: var(--navy); text-align: center; }
-.score-winner { border: 1px solid #d8c8ff; }.score-winner span { display: inline-block; animation: old-score .25s 1.65s forwards; }.score-winner strong { display: inline-block; max-width: 0; opacity: 0; color: var(--purple); animation: new-score .35s 1.8s forwards; }
-.bonus-turn { position: absolute; left: -12%; right: -12%; bottom: -24%; padding: 6px; border-radius: 7px; background: #e8f8ed; color: #16883d; text-align: center; font-size: clamp(7px, .55vw, 10px); font-weight: 900; opacity: 0; animation: pop-word .4s 2.05s forwards; }
+.mini-scores .p1-score { border-bottom: 3px solid #6d48ff; }.mini-scores .p2-score { border-bottom: 3px solid #28a866; }.mini-scores .p3-score { border-bottom: 3px solid #f47a32; }
+.score-winner { border: 1px solid #f4a16f; background: #fff4ea !important; }.score-winner span { display: inline-block; animation: old-score .25s 1.65s forwards; }.score-winner strong { display: inline-block; max-width: 0; opacity: 0; color: #dd5d18; animation: new-score .35s 1.8s forwards; }
+.bonus-turn { position: absolute; left: -14%; right: -14%; bottom: -24%; padding: 6px; border-radius: 7px; background: #fff1e5; color: #bd4e14; text-align: center; font-size: clamp(6px, .5vw, 9px); font-weight: 900; opacity: 0; animation: pop-word .4s 2.05s forwards; }
 
 /* Minesweeper */
 .mine-wrap { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
