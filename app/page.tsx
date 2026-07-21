@@ -315,12 +315,16 @@ function NumberFlowDemo() {
 function BoxesDemo() {
   return (
     <div className="boxes-board">
-      <div className="box-instruction"><span className="p1-dot" />P1 <span className="p2-dot" />P2 <span className="p3-dot" />P3 DRAWS THE 4TH SIDE</div>
+      <div className="box-instruction"><span className="p1-dot" />P1 → <span className="p2-dot" />P2 → <span className="p3-dot" />P3 · REPEAT</div>
       {Array.from({ length: 16 }, (_, i) => <i className="dot" key={`d${i}`} />)}
-      <i className="box-edge edge-top edge-p1"/><i className="box-edge edge-left edge-p2"/><i className="box-edge edge-right edge-p1"/>
+      <i className="box-edge edge-top edge-p1" style={{ "--delay": ".25s" } as React.CSSProperties}/>
+      <i className="box-edge edge-left edge-p2" style={{ "--delay": ".7s" } as React.CSSProperties}/>
+      <i className="box-edge edge-right edge-p3" style={{ "--delay": "1.15s" } as React.CSSProperties}/>
+      <i className="box-edge extra-p1 edge-p1" style={{ "--delay": "1.6s" } as React.CSSProperties}/>
+      <i className="box-edge extra-p2 edge-p2" style={{ "--delay": "2.05s" } as React.CSSProperties}/>
       <i className="box-edge edge-fourth"/>
       <span className="claimed-box focus-box"><b>P3</b><small>+1 BOX</small></span>
-      <div className="mini-scores"><b className="p1-score">P1&nbsp; 2</b><b className="p2-score">P2&nbsp; 2</b><b className="score-winner p3-score">P3&nbsp; <span>1</span><strong>2</strong></b></div>
+      <div className="mini-scores"><b className="p1-score">P1&nbsp; 0</b><b className="p2-score">P2&nbsp; 0</b><b className="score-winner p3-score">P3&nbsp; <span>0</span><strong>1</strong></b></div>
       <div className="bonus-turn">ORANGE COMPLETES THE BOX · P3 SCORES +1 &amp; PLAYS AGAIN</div>
     </div>
   );
