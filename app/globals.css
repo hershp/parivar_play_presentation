@@ -136,14 +136,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .bonus-turn { position: absolute; left: -14%; right: -14%; bottom: -24%; padding: 6px; border-radius: 7px; background: #fff1e5; color: #bd4e14; text-align: center; font-size: clamp(6px, .5vw, 9px); font-weight: 900; opacity: 0; animation: pop-word .4s 3.55s forwards; }
 
 /* Minesweeper */
-.mine-wrap { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
-.mine-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; width: 86%; margin: 0 auto; }
-.mine-board span { aspect-ratio: 1; display: grid; place-items: center; border-radius: 8px; font-weight: 900; font-size: clamp(13px, 1.2vw, 20px); }
-.mine-board .covered { background: #8c7ac6; box-shadow: inset 0 -4px #6b58a6; }
-.mine-board .safe { background: #fff; border: 1px solid #d9cff2; color: var(--purple); animation: reveal .35s calc(var(--i) * .12s) both; }
-.mine-board .mine { color: #fff; background: #ff5f5b; animation: mine-hit .5s 1.4s both; }
-.turn-strip { display: grid; grid-template-columns: repeat(2, auto); gap: 5px 12px; width: 86%; margin: 0 auto; font-size: 10px; }
-.turn-strip b { color: var(--navy); }.turn-strip span { color: var(--green); }.turn-strip .out { color: #c2bacb; text-decoration: line-through; }
+.mine-wrap { height: 100%; display: grid; grid-template-rows: 28px 1fr auto; align-items: center; gap: 4%; }
+.mine-turn-banner { position: relative; height: 28px; border-radius: 8px; background: var(--navy); overflow: hidden; color: #fff; }
+.mine-turn-banner span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 4px 7px; text-align: center; font-size: clamp(6px, .48vw, 9px); font-weight: 800; opacity: 0; animation: mine-message 1.05s var(--delay) both; }
+.mine-turn-banner b { color: #ffe28d; }
+.mine-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 96%; margin: 0 auto; }
+.mine-cell { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-radius: 7px; background: #8c7ac6; color: transparent; box-shadow: inset 0 -3px #6b58a6; font-weight: 900; font-size: clamp(11px, .95vw, 17px); }
+.mine-cell[data-player]::after { content: attr(data-player) " TAP"; position: absolute; z-index: 3; left: 50%; top: 50%; min-width: 42px; padding: 3px 5px; border-radius: 6px; background: var(--navy); color: #fff; text-align: center; font-size: 6px; letter-spacing: .04em; opacity: 0; transform: translate(-50%,-115%) scale(.75); animation: picker-tap .7s var(--delay) both; }
+.mine-cell.safe-pick { animation: safe-cell .4s calc(var(--delay) + .28s) both; }
+.mine-cell.mine-pick { animation: mine-cell-hit .5s calc(var(--delay) + .28s) both; }
+.mine-players { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; width: 100%; }
+.mine-players > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 3px; border: 1px solid #ded4f7; border-radius: 8px; background: #fff; color: var(--navy); font-size: clamp(7px, .55vw, 10px); }
+.mine-players b { font-size: 1.1em; }.mine-players small { color: var(--muted); font-size: .72em; }.mine-players strong { position: absolute; inset: 0; display: grid; place-items: center; padding: 3px; border-radius: 7px; background: #eeeaf0; color: #8a8290; font-size: clamp(6px, .48vw, 9px); text-align: center; opacity: 0; }
+.mine-players .player-one { animation: player-one-turn 5.7s both; }.mine-players .player-two { animation: player-two-turn 5.7s both; }.mine-players .player-three { animation: player-three-turn 5.7s both; }
+.mine-players .player-one strong { animation: player-out .3s 4.7s forwards; }.mine-players .player-two strong { animation: player-out .3s 2.4s forwards; }.mine-players .player-three strong { background: #e7f9ec; color: #16883d; animation: player-out .35s 5.25s forwards; }
 
 /* Codebreaker */
 .code-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6%; padding: 6%; }
@@ -279,6 +285,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes new-score { to { max-width: 24px; opacity: 1; transform: translateX(2px); } }
 @keyframes reveal { from { color: transparent; background: #8c7ac6; } to { color: var(--purple); background: #fff; } }
 @keyframes mine-hit { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.25); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes mine-message { 0%, 100% { opacity: 0; transform: translateY(5px); } 12%, 82% { opacity: 1; transform: translateY(0); } }
+@keyframes picker-tap { 0%, 100% { opacity: 0; transform: translate(-50%,-125%) scale(.75); } 25%, 68% { opacity: 1; transform: translate(-50%,-105%) scale(1); } }
+@keyframes safe-cell { 0% { color: transparent; background: #8c7ac6; } 45% { box-shadow: 0 0 0 4px #6d48ff; transform: scale(.9); } 100% { color: var(--purple); background: #fff; box-shadow: inset 0 0 0 2px #d9cff2; transform: scale(1); } }
+@keyframes mine-cell-hit { 0% { color: transparent; background: #8c7ac6; } 45% { box-shadow: 0 0 0 5px #ffaaa7; transform: scale(.88); } 70% { transform: scale(1.13); } 100% { color: #fff; background: #ef5d58; box-shadow: inset 0 -3px #c63e3a; transform: scale(1); } }
+@keyframes player-out { to { opacity: 1; } }
+@keyframes player-one-turn { 0%, 18%, 65%, 80% { border-color: #6d48ff; box-shadow: 0 0 0 3px #6d48ff30; background: #f2edff; } 20%, 63%, 82%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } }
+@keyframes player-two-turn { 0%, 20%, 40%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 22%, 38% { border-color: #28a866; box-shadow: 0 0 0 3px #28a86630; background: #ebf9f1; } }
+@keyframes player-three-turn { 0%, 40%, 63%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 42%, 61% { border-color: #f47a32; box-shadow: 0 0 0 3px #f47a3230; background: #fff2e9; } }
 @keyframes guess-in { to { opacity: 1; transform: translateX(0); } }
 @keyframes cross-letter { from { color: transparent; } to { color: var(--navy); background: #e9f8ed; } }
 @keyframes clock-spin { from { transform: rotate(0deg); } to { transform: rotate(354deg); } }
