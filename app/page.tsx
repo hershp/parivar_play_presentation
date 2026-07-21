@@ -478,6 +478,12 @@ export default function Home() {
 
   const slide = slides[index];
 
+  useEffect(() => {
+    if (slide.demo === "overview" || slide.demo === "scoring" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const loop = window.setInterval(() => setDemoKey((key) => key + 1), 6500);
+    return () => window.clearInterval(loop);
+  }, [slide.demo]);
+
   return (
     <main className="presentation-shell" onTouchStart={(e) => { touchStart.current = e.changedTouches[0].clientX; }} onTouchEnd={(e) => { if (touchStart.current === null) return; const delta = e.changedTouches[0].clientX - touchStart.current; if (Math.abs(delta) > 60) go(index + (delta < 0 ? 1 : -1)); touchStart.current = null; }}>
       <nav className="topbar" aria-label="Presentation controls">

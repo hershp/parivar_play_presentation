@@ -288,16 +288,26 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .topbar { width: 100%; position: sticky; top: 0; z-index: 20; background: #f2ece7ed; backdrop-filter: blur(10px); }
   .slide-picker label, .fullscreen { display: none; }
   .slide-picker select { min-width: 140px; }
-  .slide-frame { width: 100%; aspect-ratio: auto; min-height: 0; overflow: hidden; grid-template-columns: 1fr; gap: 28px; padding: 28px 18px 48px; }
+  .slide-frame { width: 100%; aspect-ratio: auto; min-height: 0; overflow: hidden; grid-template-columns: 1fr; grid-template-areas: "heading" "victory" "demo" "rules"; gap: 14px; padding: 18px 14px 32px; }
   .slide-frame.welcome-slide { aspect-ratio: 1731 / 909; padding: 0; }
   .welcome-art { height: auto; }
-  .instruction-card { height: auto; min-height: 750px; padding: 28px 24px; }
-  .game-heading h1 { font-size: 34px; }
-  .fact-block h2 { flex-basis: 124px; }
+  .slide-frame:not(.welcome-slide):not(.scoring-slide) .decor { display: none; }
+  .slide-frame:not(.welcome-slide):not(.scoring-slide) .instruction-card { display: contents; }
+  .game-heading { grid-area: heading; margin: 0; padding: 18px 20px 14px; border: 1px solid var(--peach); border-radius: 20px; background: #fff; box-shadow: 0 8px 20px #3d2e2612; }
+  .game-heading h1 { font-size: clamp(30px, 9vw, 42px); }
+  .fact-block { grid-area: victory; margin: 0; padding: 12px 16px; border: 1px solid var(--peach); border-radius: 18px; background: #fff; }
+  .fact-block h2 { flex-basis: 116px; font-size: 11px; }
   .victory-pill { flex: 1; min-width: 0; }
+  .rules-block { grid-area: rules; padding: 18px 16px; border: 1px solid var(--peach); border-radius: 20px; background: #fff; }
+  .rules-block ol { grid-auto-rows: auto; }
+  .rules-block li { min-height: 62px; }
   .rules-block li { font-size: 17px; }
-  .mechanics-panel { min-height: 720px; }
-  .phone-shell { width: min(420px, 94%); height: auto; aspect-ratio: .6; }
+  .demo-remount { grid-area: demo; height: auto; padding: 16px 10px 20px; border: 1px solid #ded3ff; border-radius: 24px; background: linear-gradient(145deg,#fff,#f7f2ff); box-shadow: 0 10px 24px #432e7514; }
+  .mechanics-panel { min-height: 610px; }
+  .mechanics-title { height: 56px; padding: 0 6px; }
+  .mechanics-title h2 { font-size: 25px; }
+  .phone-shell { width: min(360px, 88vw); height: auto; aspect-ratio: .6; }
+  .page-number { display: none; }
   .slide-frame.scoring-slide { display: block; min-height: 1540px; padding: 18px; }
   .scoring-page { height: auto; min-height: 1500px; grid-template-rows: auto 1fr auto; gap: 14px; padding: 20px; }
   .scoring-header { align-items: flex-start; }
