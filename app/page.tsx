@@ -23,6 +23,7 @@ type Slide = {
   shortTitle: string;
   eyebrow: string;
   victory: string;
+  playMode?: "Collaborative" | "Competitive";
   rules: string[];
   demo: DemoKind;
   demoLabel: string;
@@ -55,6 +56,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Word Search",
     eyebrow: "FIND THE HIDDEN WORDS",
     victory: "First to find all 10 wins",
+    playMode: "Competitive",
     rules: [
       "Find ten words hidden in a 10×10 grid",
       "Words may run horizontally or vertically",
@@ -73,6 +75,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Speed Sprint",
     eyebrow: "CONNECT EVERY NUMBER",
     victory: "First to finish 3 rounds",
+    playMode: "Competitive",
     rules: [
       "All players receive the same numbered grid",
       "Start at 1 and connect numbers in order",
@@ -92,6 +95,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Battle Boxes",
     eyebrow: "DRAW LINES · CLAIM BOXES",
     victory: "Most boxes wins",
+    playMode: "Competitive",
     rules: [
       "Players share one grid of dots",
       "Take turns drawing one horizontal or vertical line",
@@ -111,6 +115,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Last Man Standing",
     eyebrow: "PLACE BOMBS · OUTLAST EVERYONE",
     victory: "First to win 2 rounds",
+    playMode: "Competitive",
     rules: [
       "Each player secretly places three bombs on the grid",
       "After all nine bombs are placed, take turns selecting squares",
@@ -131,6 +136,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Codebreaker",
     eyebrow: "CRACK THE FOUR-DIGIT CODE",
     victory: "First to win 2 rounds",
+    playMode: "Competitive",
     rules: [
       "All three players attack the same secret code",
       "Submit unlimited four-digit guesses",
@@ -150,6 +156,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Crossword",
     eyebrow: "SOLVE FROM THE CLUES",
     victory: "First correct grid wins",
+    playMode: "Collaborative",
     rules: [
       "Read the across and down clues",
       "Enter one answer into each numbered slot",
@@ -168,6 +175,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Time Tap",
     eyebrow: "CATCH THE TARGET TIME",
     victory: "Closest player wins",
+    playMode: "Competitive",
     rules: [
       "A target duration is announced",
       "The digital clock disappears when the round begins",
@@ -187,6 +195,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Perfect Pairs",
     eyebrow: "MEMORIZE · MATCH · SURVIVE",
     victory: "Find every pair before losing 5 lives",
+    playMode: "Collaborative",
     rules: [
       "Study all 20 cards face-up for 7 seconds",
       "Memorize the pairs on the 5×4 board together",
@@ -205,6 +214,7 @@ const slideLibrary: Slide[] = [
     shortTitle: "Math Mania",
     eyebrow: "THINK FAST · TYPE FASTER",
     victory: "Most correct answers wins the round",
+    playMode: "Competitive",
     rules: [
       "Each player sees only their own current question",
       "Solve as many questions as possible before time runs out",
@@ -513,7 +523,7 @@ function InstructionCard({ slide }: { slide: Slide }) {
   return (
     <article className="instruction-card">
       <header className="game-heading"><p>{slide.eyebrow}</p><h1>{slide.title}</h1></header>
-      <section className="fact-block"><h2><span>★</span> Victory condition</h2><div className="victory-pill">{slide.victory}</div></section>
+      <section className="fact-block"><h2><span>★</span> Victory condition</h2><div className="victory-pill">{slide.victory}</div>{slide.playMode && <div className={`play-mode ${slide.playMode.toLowerCase()}`}><span>{slide.playMode === "Collaborative" ? "◆" : "⚔"}</span><b>{slide.playMode}</b><small>{slide.playMode === "Collaborative" ? "Play together" : "Play against each other"}</small></div>}</section>
       <section className="rules-block"><h2><span>▤</span> Rules</h2><ol>{slide.rules.map((rule, i) => <li key={rule}><b>{i + 1}</b><span>{rule}</span></li>)}</ol></section>
     </article>
   );
