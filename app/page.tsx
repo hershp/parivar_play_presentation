@@ -230,7 +230,7 @@ const slideLibrary: Slide[] = [
     victory: "Highest cumulative total",
     rules: [
       "Every player starts with 100 points; winners add 50",
-      "Multiply for mandal diversity and a vadil in the trio",
+      "Multiply based on the number of mandals participating and a vadil in the trio",
       "Repeated exact trios earn a shrinking multiplier",
       "New mandal badges add a separate one-time 200 points",
     ],
@@ -472,7 +472,7 @@ function ScoringPage() {
         <section className="scoring-pillar modifier-pillar">
           <div className="pillar-heading"><span>3</span><div><h2>Earn multipliers</h2><p>Build a team that connects the Parivar.</p></div></div>
           <div className="simple-multipliers">
-            <div><strong>NEW PERSON</strong><span>Play with someone new to increase your score.</span></div>
+            <div><strong>MANDAL MULTIPLIER</strong><span>Your multiplier is based on the number of mandals participating.</span></div>
             <div><strong>VADIL</strong><span>Include a Vadil in your trio to increase everyone&apos;s score.</span></div>
           </div>
         </section>
@@ -486,7 +486,7 @@ function ScoringPage() {
 
       <footer className="scoring-footer">
         <div className="score-formula"><small>START HERE</small><strong>Participate = 100 points · Win = +50 points</strong></div>
-        <div className="worked-example"><small>THEN</small><div>New person or Vadil?<br/><strong>Your score gets multiplied.</strong></div></div>
+        <div className="worked-example"><small>THEN</small><div>Multiple mandals or a Vadil?<br/><strong>Your score gets multiplied.</strong></div></div>
       </footer>
     </article>
   );
