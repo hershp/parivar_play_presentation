@@ -55,15 +55,12 @@ const slideLibrary: Slide[] = [
     title: "Word Search",
     shortTitle: "Word Search",
     eyebrow: "FIND THE HIDDEN WORDS",
-    victory: "First to find all 10 wins",
+    victory: "Find all words before your opponents",
     playMode: "Competitive",
     rules: [
-      "Find ten words hidden in a 10×10 grid",
-      "Words may run horizontally or vertically",
-      "Drag across letters to select a word",
-      "Correct words lock into the found list",
-      "Use the provided Gujarati and English words",
-      "The first player to find all ten wins",
+      "Press the first letter, swipe across every letter in the word, and release on the last letter",
+      "Or tap the first letter and then the last letter",
+      "Words may be vertical, horizontal, or diagonal",
     ],
     demo: "wordsearch",
     demoLabel: "WORD GRID",
@@ -155,15 +152,13 @@ const slideLibrary: Slide[] = [
     title: "Crossword",
     shortTitle: "Crossword",
     eyebrow: "SOLVE FROM THE CLUES",
-    victory: "First correct grid wins",
+    victory: "Solve the puzzle within the five-minute timer",
     playMode: "Collaborative",
     rules: [
-      "Read the across and down clues",
-      "Enter one answer into each numbered slot",
-      "Crossing letters must agree",
-      "Answers use the supplied Gujarati and English list",
-      "Incorrect entries remain editable",
-      "The first complete correct grid wins",
+      "Read the clues",
+      "Enter the answer to a clue by clicking the first letter",
+      "All clues have only one solution word",
+      "Words can be English or Gujarati",
     ],
     demo: "crossword",
     demoLabel: "CLUE BOARD",
@@ -446,7 +441,7 @@ function PairsDemo() {
 }
 
 function MathDemo() {
-  return <div className="math-demo"><div className="math-head"><b>P2&apos;S SCREEN</b><span>PRIVATE QUESTION</span><strong>00:24</strong></div><div className="math-question"><div className="question-one"><small>CURRENT QUESTION · #9</small><b>6 × 4 =</b><span>24<i>▌</i></span><em>✓ CORRECT · +1</em></div><div className="question-two"><small>CURRENT QUESTION · #10</small><b>17 − 8 =</b><span><i>▌</i></span><em>ANSWER TO CONTINUE</em></div></div><div className="math-scoreboard"><div><b>P1</b><span>7</span></div><div className="leader"><b>P2</b><span><i>8</i><strong>9</strong></span></div><div><b>P3</b><span>6</span></div></div><div className="math-keyboard">CORRECT ANSWER UNLOCKS THE NEXT QUESTION</div></div>;
+  return <div className="math-demo"><div className="math-head"><b>YOUR SCREEN</b><span>PRIVATE QUESTION</span><strong>00:24</strong></div><div className="math-question"><div className="question-one"><small>CURRENT QUESTION · #9</small><b>6 × 4 =</b><span>24<i>▌</i></span><em>✓ CORRECT · +1</em></div><div className="question-two"><small>CURRENT QUESTION · #10</small><b>17 − 8 =</b><span><i>▌</i></span><em>ANSWER TO CONTINUE</em></div></div><div className="math-personal-score"><b>YOUR CORRECT ANSWERS</b><span><i>8</i><strong>9</strong></span></div><div className="math-keyboard">CORRECT ANSWER UNLOCKS THE NEXT QUESTION</div></div>;
 }
 
 function ScoringDemo() {
