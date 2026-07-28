@@ -107,21 +107,22 @@ const slideLibrary: Slide[] = [
   },
   {
     number: "04",
-    title: "Minesweeper",
-    shortTitle: "Minesweeper",
-    eyebrow: "BE THE LAST PLAYER STANDING",
+    title: "Last Man Standing",
+    shortTitle: "Last Man Standing",
+    eyebrow: "PLACE BOMBS · OUTLAST EVERYONE",
     victory: "First to win 2 rounds",
     rules: [
-      "Share the same grid and take turns clicking",
-      "Safe squares reveal nearby mine counts",
+      "Each player secretly places three bombs on the grid",
+      "After all nine bombs are placed, take turns selecting squares",
+      "Safe squares reveal nearby bomb counts",
       "Use those numbers to judge the next move",
-      "Hitting a mine eliminates you for the round",
+      "Hitting any player's bomb eliminates you for the round",
       "Running out of turn time also eliminates you",
       "Last player standing wins the round",
     ],
     demo: "minesweeper",
-    demoLabel: "SHARED BOARD",
-    demoMeta: "P1 TURN",
+    demoLabel: "BOMB PLACEMENT → SURVIVAL",
+    demoMeta: "3 BOMBS EACH",
     link: "https://bansipatel.github.io/ClaudeCodeTest/minesweeper.html",
   },
   {
@@ -203,13 +204,13 @@ const slideLibrary: Slide[] = [
     title: "Math Mania",
     shortTitle: "Math Mania",
     eyebrow: "THINK FAST · TYPE FASTER",
-    victory: "Most correct answers wins",
+    victory: "Most correct answers wins the round",
     rules: [
-      "All three players receive arithmetic questions",
+      "Each player sees only their own current question",
       "Solve as many questions as possible before time runs out",
       "Type each answer using the keyboard",
-      "Submit an answer to move to the next question",
-      "Only correct answers count toward your score",
+      "A correct answer unlocks the next question",
+      "An incorrect answer keeps the current question on screen",
       "The player with the most correct answers wins the round",
     ],
     demo: "math",
@@ -350,31 +351,41 @@ function BoxesDemo() {
 
 function MinesweeperDemo() {
   const picks: Record<number, { player: string; result: string; value: string; delay: string }> = {
-    0: { player: "P1", result: "safe-pick", value: "", delay: ".65s" },
-    12: { player: "P2", result: "mine-pick", value: "✹", delay: "1.95s" },
-    18: { player: "P3", result: "safe-pick", value: "2", delay: "3s" },
-    4: { player: "P1", result: "mine-pick", value: "✹", delay: "4.15s" },
+    0: { player: "P1", result: "safe-pick", value: "", delay: "3.65s" },
+    12: { player: "P2", result: "mine-pick", value: "✹", delay: "4.85s" },
+    18: { player: "P3", result: "safe-pick", value: "2", delay: "6s" },
+    22: { player: "P1", result: "mine-pick", value: "✹", delay: "7.15s" },
+  };
+  const bombs: Record<number, { player: string; delay: string }> = {
+    1: { player: "p1", delay: ".25s" }, 7: { player: "p1", delay: ".48s" }, 19: { player: "p1", delay: ".71s" },
+    3: { player: "p2", delay: "1.15s" }, 12: { player: "p2", delay: "1.38s" }, 22: { player: "p2", delay: "1.61s" },
+    5: { player: "p3", delay: "2.05s" }, 16: { player: "p3", delay: "2.28s" }, 24: { player: "p3", delay: "2.51s" },
   };
   const floodValues: Record<number, string> = {
     1: "", 2: "", 3: "1", 5: "", 6: "1", 7: "1", 10: "", 11: "1",
-    15: "", 16: "1", 17: "2", 20: "", 21: "", 22: "1",
+    15: "", 16: "1", 17: "2", 20: "", 21: "",
   };
   const messages = [
-    ["P1", "PICKS EMPTY · SAFE AREA OPENS AUTOMATICALLY", ".25s"],
-    ["P2", "HITS A MINE · ELIMINATED", "1.55s"],
-    ["P3", "PICKS SAFE · STAYS IN", "2.7s"],
-    ["P1", "HITS A MINE · ELIMINATED", "3.85s"],
-    ["P3", "LAST PLAYER STANDING · WINS", "5s"],
+    ["P1", "SECRETLY PLACES 3 BOMBS", ".05s"],
+    ["P2", "SECRETLY PLACES 3 BOMBS", "1s"],
+    ["P3", "SECRETLY PLACES 3 BOMBS", "1.95s"],
+    ["ALL", "9 BOMBS HIDDEN · SURVIVAL BEGINS", "2.9s"],
+    ["P1", "PICKS EMPTY · SAFE AREA OPENS", "3.45s"],
+    ["P2", "HITS A BOMB · ELIMINATED", "4.65s"],
+    ["P3", "PICKS SAFE · STAYS IN", "5.8s"],
+    ["P1", "HITS A BOMB · ELIMINATED", "6.95s"],
+    ["P3", "LAST PLAYER STANDING · WINS", "8.05s"],
   ];
   return (
     <div className="mine-wrap">
       <div className="mine-turn-banner">{messages.map(([player, text, delay]) => <span style={{ "--delay": delay } as React.CSSProperties} key={text + player}><b>{player}</b> {text}</span>)}</div>
       <div className="mine-board">{Array.from({ length: 25 }, (_, i) => {
         const pick = picks[i];
+        const bomb = bombs[i];
         const isFloodCell = Object.hasOwn(floodValues, i);
         const floodOrder = Object.keys(floodValues).indexOf(String(i));
-        const style = pick ? { "--delay": pick.delay } : isFloodCell ? { "--delay": `${.9 + floodOrder * .035}s` } : undefined;
-        return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} data-player={pick?.player} style={style as React.CSSProperties | undefined} key={i}>{pick?.value ?? floodValues[i]}</span>;
+        const style = pick ? { "--delay": pick.delay } : isFloodCell ? { "--delay": `${3.9 + floodOrder * .035}s` } : undefined;
+        return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} data-player={pick?.player} style={style as React.CSSProperties | undefined} key={i}>{bomb && <i className={`placed-bomb ${bomb.player}`} style={{ "--place-delay": bomb.delay } as React.CSSProperties}>✹</i>}{pick?.value ?? floodValues[i]}</span>;
       })}</div>
       <div className="mine-players">
         <div className="player-one"><b>P1</b><small>READY</small><strong>ELIMINATED</strong></div>
@@ -425,8 +436,7 @@ function PairsDemo() {
 }
 
 function MathDemo() {
-  const players = [["P1", "7", "12 + 8"], ["P2", "9", "6 × 4"], ["P3", "6", "15 − 7"]];
-  return <div className="math-demo"><div className="math-timer">00:24 <span>REMAINING</span></div>{players.map(([player, score, question], i) => <div className={`math-player${player === "P2" ? " math-leader" : ""}`} style={{ "--i": i } as React.CSSProperties} key={player}><b>{player}</b><div><small>{question} =</small><strong>{player === "P2" ? "24" : player === "P1" ? "20" : "8"}<i>▌</i></strong></div><span>{score} CORRECT</span></div>)}<div className="math-keyboard">TYPE ANSWER · PRESS ENTER</div></div>;
+  return <div className="math-demo"><div className="math-head"><b>P2&apos;S SCREEN</b><span>PRIVATE QUESTION</span><strong>00:24</strong></div><div className="math-question"><div className="question-one"><small>CURRENT QUESTION · #9</small><b>6 × 4 =</b><span>24<i>▌</i></span><em>✓ CORRECT · +1</em></div><div className="question-two"><small>CURRENT QUESTION · #10</small><b>17 − 8 =</b><span><i>▌</i></span><em>ANSWER TO CONTINUE</em></div></div><div className="math-scoreboard"><div><b>P1</b><span>7</span></div><div className="leader"><b>P2</b><span><i>8</i><strong>9</strong></span></div><div><b>P3</b><span>6</span></div></div><div className="math-keyboard">CORRECT ANSWER UNLOCKS THE NEXT QUESTION</div></div>;
 }
 
 function ScoringDemo() {

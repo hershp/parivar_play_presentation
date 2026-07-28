@@ -135,13 +135,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .score-winner { border: 1px solid #f4a16f; background: #fff4ea !important; }.score-winner span { display: inline-block; animation: old-score .25s 3.15s forwards; }.score-winner strong { display: inline-block; max-width: 0; opacity: 0; color: #dd5d18; animation: new-score .35s 3.3s forwards; }
 .bonus-turn { position: absolute; left: -14%; right: -14%; bottom: -24%; padding: 6px; border-radius: 7px; background: #fff1e5; color: #bd4e14; text-align: center; font-size: clamp(6px, .5vw, 9px); font-weight: 900; opacity: 0; animation: pop-word .4s 3.55s forwards; }
 
-/* Minesweeper */
+/* Last Man Standing */
 .mine-wrap { height: 100%; display: grid; grid-template-rows: 28px 1fr auto; align-items: center; gap: 4%; }
 .mine-turn-banner { position: relative; height: 28px; border-radius: 8px; background: var(--navy); overflow: hidden; color: #fff; }
 .mine-turn-banner span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 4px 7px; text-align: center; font-size: clamp(6px, .48vw, 9px); font-weight: 800; opacity: 0; animation: mine-message 1.05s var(--delay) both; }
 .mine-turn-banner b { color: #ffe28d; }
 .mine-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 96%; margin: 0 auto; }
 .mine-cell { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-radius: 7px; background: #8c7ac6; color: transparent; box-shadow: inset 0 -3px #6b58a6; font-weight: 900; font-size: clamp(11px, .95vw, 17px); }
+.placed-bomb { position: absolute; z-index: 4; display: grid; place-items: center; inset: 4px; border-radius: 6px; color: #fff; font-size: clamp(11px,.9vw,16px); font-style: normal; opacity: 0; animation: bomb-place .22s var(--place-delay) forwards, bomb-hide .2s 2.85s forwards; }.placed-bomb.p1 { background: #6d48ff; }.placed-bomb.p2 { background: #28a866; }.placed-bomb.p3 { background: #f47a32; }
 .mine-cell[data-player]::after { content: attr(data-player) " TAP"; position: absolute; z-index: 3; left: 50%; top: 50%; min-width: 42px; padding: 3px 5px; border-radius: 6px; background: var(--navy); color: #fff; text-align: center; font-size: 6px; letter-spacing: .04em; opacity: 0; transform: translate(-50%,-115%) scale(.75); animation: picker-tap .7s var(--delay) both; }
 .mine-cell.safe-pick { animation: safe-cell .4s calc(var(--delay) + .28s) both; }
 .mine-cell.flood-cell { animation: safe-cell .32s var(--delay) both; }
@@ -149,8 +150,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .mine-players { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; width: 100%; }
 .mine-players > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 3px; border: 1px solid #ded4f7; border-radius: 8px; background: #fff; color: var(--navy); font-size: clamp(7px, .55vw, 10px); }
 .mine-players b { font-size: 1.1em; }.mine-players small { color: var(--muted); font-size: .72em; }.mine-players strong { position: absolute; inset: 0; display: grid; place-items: center; padding: 3px; border-radius: 7px; background: #eeeaf0; color: #8a8290; font-size: clamp(6px, .48vw, 9px); text-align: center; opacity: 0; }
-.mine-players .player-one { animation: player-one-turn 5.7s both; }.mine-players .player-two { animation: player-two-turn 5.7s both; }.mine-players .player-three { animation: player-three-turn 5.7s both; }
-.mine-players .player-one strong { animation: player-out .3s 4.7s forwards; }.mine-players .player-two strong { animation: player-out .3s 2.4s forwards; }.mine-players .player-three strong { background: #e7f9ec; color: #16883d; animation: player-out .35s 5.25s forwards; }
+.mine-players .player-one { animation: player-one-turn 8.9s both; }.mine-players .player-two { animation: player-two-turn 8.9s both; }.mine-players .player-three { animation: player-three-turn 8.9s both; }
+.mine-players .player-one strong { animation: player-out .3s 7.7s forwards; }.mine-players .player-two strong { animation: player-out .3s 5.4s forwards; }.mine-players .player-three strong { background: #e7f9ec; color: #16883d; animation: player-out .35s 8.55s forwards; }
 
 /* Codebreaker */
 .code-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6%; padding: 6%; }
@@ -195,8 +196,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Math Mania */
 .math-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 5%; }
-.math-timer { align-self: center; color: var(--navy); font-size: clamp(18px,1.55vw,27px); font-weight: 900; }.math-timer span { display: block; color: var(--muted); font-size: 7px; text-align: center; letter-spacing: .12em; }
-.math-player { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 7px; padding: 7px; border: 1px solid #ded4f7; border-radius: 9px; background: #fff; color: var(--navy); opacity: 0; transform: translateX(-12px); animation: guess-in .35s calc(var(--i) * .22s + .2s) forwards; }.math-player > b { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--lavender); font-size: 9px; }.math-player div { display: flex; align-items: baseline; gap: 5px; }.math-player small { color: var(--muted); font-weight: 800; }.math-player strong { padding: 3px 6px; border-bottom: 2px solid var(--purple); font-size: 12px; }.math-player i { color: var(--purple); font-style: normal; animation: pulse .7s infinite; }.math-player > span { color: var(--purple); font-size: 7px; font-weight: 900; }.math-player.math-leader { border-color: #9bdcaf; background: #e7f9ec; }.math-player.math-leader > span { color: #16883d; }
+.math-head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 8px; color: var(--navy); }.math-head b { font-size: 10px; }.math-head span { grid-column: 1; color: var(--purple); font-size: 7px; font-weight: 900; letter-spacing: .08em; }.math-head strong { grid-column: 2; grid-row: 1 / 3; font-size: 20px; }
+.math-question { position: relative; min-height: 145px; overflow: hidden; border: 2px solid #d9ccfb; border-radius: 15px; background: #fff; box-shadow: 0 8px 18px #39236f12; }.math-question > div { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; }.math-question small { color: var(--purple); font-size: 7px; font-weight: 900; letter-spacing: .08em; }.math-question b { color: var(--navy); font-size: clamp(24px,2vw,34px); }.math-question span { min-width: 62px; min-height: 28px; padding: 3px 9px; border-bottom: 3px solid var(--purple); color: var(--navy); text-align: center; font-size: 18px; font-weight: 900; }.math-question i { color: var(--purple); font-style: normal; animation: pulse .65s infinite; }.math-question em { color: #16883d; font-size: 8px; font-style: normal; font-weight: 900; }.question-one { animation: math-old-question 4.2s both; }.question-two { opacity: 0; transform: translateX(25px); animation: math-next-question .42s 2.15s forwards; }.question-two em { color: var(--muted); }
+.math-scoreboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; }.math-scoreboard div { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: 7px; background: #f1ebff; color: var(--navy); font-size: 8px; }.math-scoreboard span { font-size: 13px; font-weight: 900; }.math-scoreboard .leader { border: 1px solid #9bdcaf; background: #e7f9ec; color: #16883d; }.math-scoreboard .leader span { display: flex; }.math-scoreboard .leader i { animation: math-old-score .2s 1.85s forwards; font-style: normal; }.math-scoreboard .leader strong { max-width: 0; opacity: 0; animation: math-new-score .3s 2.05s forwards; }
 
 /* Scoring */
 .scoring-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6%; padding: 4%; }.points-row { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 9px 14px; border-radius: 10px; color: var(--navy); transform: translateX(-20px); opacity: 0; animation: guess-in .4s calc(var(--i, 1) * .2s) forwards; }.points-row span { font-size: 24px; font-weight: 900; }.points-row.gold { background: #fff0b8; animation-delay: .2s; }.points-row.silver { background: #efebf4; animation-delay: .5s; }.points-row.bronze { background: #f3d6c5; animation-delay: .8s; }.bonus-card { display: flex; justify-content: space-between; padding: 10px; border: 1px dashed var(--purple); border-radius: 10px; color: var(--purple); font-size: 10px; }.score-equation { text-align: center; color: var(--navy); font-size: 10px; font-weight: 900; }
@@ -297,13 +299,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes reveal { from { color: transparent; background: #8c7ac6; } to { color: var(--purple); background: #fff; } }
 @keyframes mine-hit { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.25); } 100% { transform: scale(1); opacity: 1; } }
 @keyframes mine-message { 0%, 100% { opacity: 0; transform: translateY(5px); } 12%, 82% { opacity: 1; transform: translateY(0); } }
+@keyframes bomb-place { from { opacity: 0; transform: scale(.45); } to { opacity: 1; transform: scale(1); } }
+@keyframes bomb-hide { to { opacity: 0; transform: scale(.7); } }
 @keyframes picker-tap { 0%, 100% { opacity: 0; transform: translate(-50%,-125%) scale(.75); } 25%, 68% { opacity: 1; transform: translate(-50%,-105%) scale(1); } }
 @keyframes safe-cell { 0% { color: transparent; background: #8c7ac6; } 45% { box-shadow: 0 0 0 4px #6d48ff; transform: scale(.9); } 100% { color: var(--purple); background: #fff; box-shadow: inset 0 0 0 2px #d9cff2; transform: scale(1); } }
 @keyframes mine-cell-hit { 0% { color: transparent; background: #8c7ac6; } 45% { box-shadow: 0 0 0 5px #ffaaa7; transform: scale(.88); } 70% { transform: scale(1.13); } 100% { color: #fff; background: #ef5d58; box-shadow: inset 0 -3px #c63e3a; transform: scale(1); } }
 @keyframes player-out { to { opacity: 1; } }
-@keyframes player-one-turn { 0%, 18%, 65%, 80% { border-color: #6d48ff; box-shadow: 0 0 0 3px #6d48ff30; background: #f2edff; } 20%, 63%, 82%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } }
-@keyframes player-two-turn { 0%, 20%, 40%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 22%, 38% { border-color: #28a866; box-shadow: 0 0 0 3px #28a86630; background: #ebf9f1; } }
-@keyframes player-three-turn { 0%, 40%, 63%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 42%, 61% { border-color: #f47a32; box-shadow: 0 0 0 3px #f47a3230; background: #fff2e9; } }
+@keyframes player-one-turn { 0%, 9%, 39%, 52%, 75%, 84% { border-color: #6d48ff; box-shadow: 0 0 0 3px #6d48ff30; background: #f2edff; } 11%, 37%, 54%, 73%, 86%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } }
+@keyframes player-two-turn { 0%, 10%, 22%, 53%, 66%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 12%, 20%, 55%, 64% { border-color: #28a866; box-shadow: 0 0 0 3px #28a86630; background: #ebf9f1; } }
+@keyframes player-three-turn { 0%, 21%, 34%, 65%, 77% { border-color: #ded4f7; box-shadow: none; background: #fff; } 23%, 32%, 67%, 75%, 86%, 100% { border-color: #f47a32; box-shadow: 0 0 0 3px #f47a3230; background: #fff2e9; } }
 @keyframes guess-in { to { opacity: 1; transform: translateX(0); } }
 @keyframes cross-letter { from { color: transparent; } to { color: var(--navy); background: #e9f8ed; } }
 @keyframes target-reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
@@ -320,6 +324,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes pairs-message { 0%, 100% { opacity: 0; transform: translateY(5px); } 12%, 82% { opacity: 1; transform: translateY(0); } }
 @keyframes lose-life { 0%, 37% { opacity: 1; } 39%, 100% { opacity: .18; } }
 @keyframes lose-life-two { 0%, 55% { opacity: 1; } 57%, 100% { opacity: .18; } }
+@keyframes math-old-question { 0%, 48% { opacity: 1; transform: translateX(0); } 58%, 100% { opacity: 0; transform: translateX(-25px); } }
+@keyframes math-next-question { to { opacity: 1; transform: translateX(0); } }
+@keyframes math-old-score { to { max-width: 0; opacity: 0; transform: translateX(-4px); } }
+@keyframes math-new-score { to { max-width: 20px; opacity: 1; transform: translateX(1px); } }
 
 @media (max-width: 900px), (max-aspect-ratio: 5/6) {
   body { overflow: auto; }
