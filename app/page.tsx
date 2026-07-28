@@ -11,7 +11,8 @@ type DemoKind =
   | "codebreaker"
   | "crossword"
   | "samay"
-  | "haaji"
+  | "pairs"
+  | "math"
   | "scoring"
   | "leaderboard";
 
@@ -34,7 +35,7 @@ const slideLibrary: Slide[] = [
     number: "00",
     title: "Parivar Play",
     shortTitle: "Welcome",
-    eyebrow: "8 GAMES · ONE LEADERBOARD",
+    eyebrow: "9 GAMES · ONE LEADERBOARD",
     victory: "Play bold. Finish on top.",
     rules: [
       "Split everyone into three-player teams",
@@ -46,7 +47,7 @@ const slideLibrary: Slide[] = [
     ],
     demo: "overview",
     demoLabel: "TONIGHT'S LINEUP",
-    demoMeta: "8 GAMES",
+    demoMeta: "9 GAMES",
   },
   {
     number: "01",
@@ -68,8 +69,8 @@ const slideLibrary: Slide[] = [
   },
   {
     number: "02",
-    title: "Number Flow",
-    shortTitle: "Number Flow",
+    title: "Speed Sprint",
+    shortTitle: "Speed Sprint",
     eyebrow: "CONNECT EVERY NUMBER",
     victory: "First to finish 3 rounds",
     rules: [
@@ -162,13 +163,13 @@ const slideLibrary: Slide[] = [
   },
   {
     number: "07",
-    title: "Samay Sparsh",
-    shortTitle: "Samay Sparsh",
+    title: "Time Tap",
+    shortTitle: "Time Tap",
     eyebrow: "CATCH THE TARGET TIME",
     victory: "Closest player wins",
     rules: [
       "A target duration is announced",
-      "The visible clock disappears when the round begins",
+      "The digital clock disappears when the round begins",
       "Each player stops their timer by instinct",
       "Early and late guesses are both measured",
       "The closest time wins that round",
@@ -181,25 +182,42 @@ const slideLibrary: Slide[] = [
   },
   {
     number: "08",
-    title: "Haaji Naaji",
-    shortTitle: "Haaji Naaji",
-    eyebrow: "SHARE, STEAL, BLUFF",
-    victory: "Most treasure wins",
+    title: "Perfect Pairs",
+    shortTitle: "Perfect Pairs",
+    eyebrow: "MEMORIZE · MATCH · SURVIVE",
+    victory: "Find every pair before losing 5 lives",
     rules: [
-      "Three players negotiate before every choice",
-      "Secretly choose Haaji (share) or Naaji (steal)",
-      "One thief takes the whole pot",
-      "Multiple thieves cancel one another out",
-      "All sharers split the pot evenly",
-      "The biggest treasure pot appears last",
+      "Study all 20 cards face-up for 7 seconds",
+      "Memorize the pairs on the 5×4 board together",
+      "After the cards flip down, players take turns",
+      "Flip two cards and keep every correct pair",
+      "An incorrect pair costs the team one life",
+      "Find all ten pairs before all five lives are gone",
     ],
-    demo: "haaji",
-    demoLabel: "SECRET CHOICE",
-    demoMeta: "POT 300",
-    link: "https://compromise-trial.onrender.com/",
+    demo: "pairs",
+    demoLabel: "TEAM MEMORY BOARD",
+    demoMeta: "5 LIVES",
   },
   {
     number: "09",
+    title: "Math Mania",
+    shortTitle: "Math Mania",
+    eyebrow: "THINK FAST · TYPE FASTER",
+    victory: "Most correct answers wins",
+    rules: [
+      "All three players receive arithmetic questions",
+      "Solve as many questions as possible before time runs out",
+      "Type each answer using the keyboard",
+      "Submit an answer to move to the next question",
+      "Only correct answers count toward your score",
+      "The player with the most correct answers wins the round",
+    ],
+    demo: "math",
+    demoLabel: "ARITHMETIC SPRINT",
+    demoMeta: "P2 LEADS",
+  },
+  {
+    number: "10",
     title: "Overall Scoring",
     shortTitle: "Scoring",
     eyebrow: "ONE FORMULA · EVERY GAME",
@@ -212,11 +230,11 @@ const slideLibrary: Slide[] = [
     ],
     demo: "scoring",
     demoLabel: "POINTS SYSTEM",
-    demoMeta: "8 GAMES",
+    demoMeta: "9 GAMES",
   },
   {
     active: false,
-    number: "10",
+    number: "11",
     title: "Final Leaderboard",
     shortTitle: "Leaderboard",
     eyebrow: "THE FINAL COUNT",
@@ -249,7 +267,7 @@ const wordGrid = [
 function OverviewDemo() {
   return (
     <div className="overview-demo">
-      {["WORD", "FLOW", "BOX", "MINE", "CODE", "CLUE", "TIME", "PICK"].map((item, i) => (
+      {["WORD", "SPEED", "BOX", "MINE", "CODE", "CLUE", "TIME", "PAIRS", "MATH"].map((item, i) => (
         <div className="overview-tile" style={{ "--i": i } as React.CSSProperties} key={item}>
           <span>{String(i + 1).padStart(2, "0")}</span>{item}
         </div>
@@ -385,12 +403,17 @@ function CrosswordDemo() {
 
 function SamayDemo() {
   const results = [["P1", "9.84s", "0.16 early"], ["P2", "10.06s", "0.06 late"], ["P3", "10.41s", "0.41 late"]];
-  return <div className="samay-demo"><div className="target-time"><small>TARGET TIME</small><b>10.00s</b></div><div className="samay-play"><div className="timer-ring"><i/><span className="timer-running">•••</span><span className="timer-stopped">9.84</span></div><div className="stop-demo-button" role="img" aria-label="Player presses the stop button"><span>STOP</span></div></div><div className="time-results">{results.map(([player,time,difference],i) => <div className={player === "P2" ? "winner" : ""} style={{ "--delay": `${1.9 + i * 0.2}s` } as React.CSSProperties} key={player}><b>{player}</b><strong>{time}</strong><small>{difference}</small>{player === "P2" && <em>★ CLOSEST</em>}</div>)}</div><div className="round-winner">★ P2 WINS THE ROUND</div></div>;
+  return <div className="samay-demo"><div className="target-time"><small>TARGET TIME</small><b>10.00s</b></div><div className="samay-play"><div className="digital-timer" aria-label="Digital timer"><small>ELAPSED</small><span className="timer-running">--.--</span><span className="timer-stopped">09.84</span></div><div className="stop-demo-button" role="img" aria-label="Player presses the stop button"><span>STOP</span></div></div><div className="time-results">{results.map(([player,time,difference],i) => <div className={player === "P2" ? "winner" : ""} style={{ "--delay": `${1.9 + i * 0.2}s` } as React.CSSProperties} key={player}><b>{player}</b><strong>{time}</strong><small>{difference}</small>{player === "P2" && <em>★ CLOSEST</em>}</div>)}</div><div className="round-winner">★ P2 WINS THE ROUND</div></div>;
 }
 
-function HaajiDemo() {
-  const choices = [["P1", "HAAJI", "share"], ["P2", "NAAJI", "steal"], ["P3", "HAAJI", "share"]];
-  return <div className="haaji-demo"><div className="treasure">POT <b>300</b></div><div className="choice-row">{choices.map(([player, choice, meaning], i) => <div style={{ "--i": i } as React.CSSProperties} key={player}><i>{player}</i><b>{choice}</b><small>{meaning}</small></div>)}</div><div className="choice-result">ONE THIEF<br/><b>TAKES THE POT</b><span>+300</span></div></div>;
+function PairsDemo() {
+  const symbols = ["★", "●", "▲", "◆", "♥", "☀", "✿", "♣", "☂", "♫", "★", "●", "▲", "◆", "♥", "☀", "✿", "♣", "☂", "♫"];
+  return <div className="pairs-demo"><div className="pairs-top"><b>MEMORIZE</b><span>7 SECONDS</span><strong>♥ ♥ ♥ ♥ ♥</strong></div><div className="pairs-board">{symbols.map((symbol, i) => <span className={i === 0 || i === 10 ? "matched" : ""} style={{ "--i": i } as React.CSSProperties} key={`${symbol}-${i}`}><b>{symbol}</b><i>?</i></span>)}</div><div className="pairs-status">TEAM TURN · FIND ALL 10 PAIRS</div></div>;
+}
+
+function MathDemo() {
+  const players = [["P1", "7", "12 + 8"], ["P2", "9", "6 × 4"], ["P3", "6", "15 − 7"]];
+  return <div className="math-demo"><div className="math-timer">00:24 <span>REMAINING</span></div>{players.map(([player, score, question], i) => <div className={`math-player${player === "P2" ? " math-leader" : ""}`} style={{ "--i": i } as React.CSSProperties} key={player}><b>{player}</b><div><small>{question} =</small><strong>{player === "P2" ? "24" : player === "P1" ? "20" : "8"}<i>▌</i></strong></div><span>{score} CORRECT</span></div>)}<div className="math-keyboard">TYPE ANSWER · PRESS ENTER</div></div>;
 }
 
 function ScoringDemo() {
@@ -456,7 +479,8 @@ function Demo({ kind }: { kind: DemoKind }) {
     case "codebreaker": return <CodebreakerDemo />;
     case "crossword": return <CrosswordDemo />;
     case "samay": return <SamayDemo />;
-    case "haaji": return <HaajiDemo />;
+    case "pairs": return <PairsDemo />;
+    case "math": return <MathDemo />;
     case "scoring": return <ScoringDemo />;
     case "leaderboard": return <LeaderboardDemo />;
   }
@@ -529,7 +553,7 @@ export default function Home() {
       </nav>
 
       <div className={`slide-frame${slide.demo === "scoring" ? " scoring-slide" : slide.demo === "overview" ? " welcome-slide" : ""}`} aria-live="polite">
-        {slide.demo === "overview" ? <img className="welcome-art" src="/parivar-play-welcome.png" alt="Parivar Play — eight games, animated rules, one leaderboard" /> : <><div className="decor decor-top"/><div className="decor decor-right"/><div className="decor decor-bottom"/><div className="decor decor-dot"/>{slide.demo === "scoring" ? <ScoringPage /> : <><InstructionCard slide={slide} /><div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div></>}<span className="page-number">{slide.number}</span></>}
+        {slide.demo === "overview" ? <img className="welcome-art" src="/parivar-play-welcome.png" alt="Parivar Play — nine games, animated rules, one leaderboard" /> : <><div className="decor decor-top"/><div className="decor decor-right"/><div className="decor decor-bottom"/><div className="decor decor-dot"/>{slide.demo === "scoring" ? <ScoringPage /> : <><InstructionCard slide={slide} /><div key={`${slide.number}-${demoKey}`} className="demo-remount"><Phone slide={slide} replay={() => setDemoKey((key) => key + 1)} /></div></>}<span className="page-number">{slide.number}</span></>}
       </div>
 
       <footer className="deck-controls">

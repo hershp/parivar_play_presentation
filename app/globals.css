@@ -91,7 +91,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .found-words .pop-word { animation: pop-word .5s 1.45s both; color: #16883d; background: #e7f9ec; }
 .found-words .diagonal-word { animation-delay: 2.35s; color: #6b3fd6; background: #f0eaff; }
 
-/* Number Flow */
+/* Speed Sprint */
 .flow-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
 .flow-board { width: 88%; aspect-ratio: 1; margin: 0 auto; display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid #cfc9c4; border-radius: 3px; overflow: hidden; background: #fffdfb; }
 .flow-cell { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-right: 1px solid #ddd7d2; border-bottom: 1px solid #ddd7d2; color: #2d2926; font-size: clamp(10px, .85vw, 15px); font-weight: 900; }
@@ -172,21 +172,28 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Samay */
 .samay-demo { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4%; }
 .target-time { display: flex; gap: 9px; align-items: baseline; padding: 6px 11px; border-radius: 9px; background: #f1ebff; color: var(--navy); animation: target-reveal .4s both; }.target-time small { color: var(--purple); font-size: clamp(7px, .56vw, 10px); font-weight: 900; }.target-time b { font-size: clamp(16px, 1.35vw, 23px); }
-.samay-play { width: 76%; display: grid; grid-template-columns: 1fr .62fr; align-items: center; gap: 12%; }
-.timer-ring { position: relative; width: 100%; aspect-ratio: 1; display: grid; place-items: center; border: 8px solid #ded3fb; border-radius: 50%; color: var(--navy); font-size: clamp(16px, 1.45vw, 25px); font-weight: 900; }
-.timer-ring i { position: absolute; left: calc(50% - 1.5px); top: 10%; width: 3px; height: 40%; background: #ff6762; transform-origin: 50% 100%; animation: clock-spin 1.35s cubic-bezier(.2,.8,.4,1) forwards; }
-.timer-running { letter-spacing: .12em; animation: timer-hide .2s 1.35s forwards; }.timer-stopped { position: absolute; opacity: 0; animation: timer-stop .3s 1.45s forwards; }
+.samay-play { width: 88%; display: grid; grid-template-columns: 1fr .48fr; align-items: center; gap: 10%; }
+.digital-timer { position: relative; min-height: 82px; display: grid; place-items: center; padding: 20px 10px 8px; border: 5px solid var(--navy); border-radius: 12px; background: #201d32; color: #8df3ad; box-shadow: inset 0 0 0 2px #49435e, 0 7px 16px #24166c25; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(20px, 1.8vw, 31px); font-weight: 900; letter-spacing: .08em; }
+.digital-timer small { position: absolute; top: 7px; color: #bdb6d4; font: 700 clamp(6px, .45vw, 8px)/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .14em; }
+.timer-running { animation: timer-hide .2s 1.35s forwards; }.timer-stopped { position: absolute; top: 34px; opacity: 0; animation: timer-stop .3s 1.45s forwards; }
 .stop-demo-button { aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(145deg,#ff8177,#e94745); color: #fff; box-shadow: 0 7px 0 #b93636, 0 10px 17px #ee5d5650; font-size: clamp(8px, .7vw, 12px); font-weight: 900; animation: stop-press .28s 1.25s forwards; }
 .time-results { display: grid; gap: 4px; width: 94%; font-size: clamp(7px, .56vw, 10px); }
 .time-results > div { position: relative; display: grid; grid-template-columns: .45fr .7fr 1fr; align-items: center; gap: 5px; padding: 5px 7px; border-radius: 7px; background: #fff; color: var(--navy); opacity: 0; transform: translateY(7px); animation: result-reveal .32s var(--delay) forwards; }
 .time-results strong { font-size: 1.1em; }.time-results small { color: var(--muted); }.time-results .winner { padding-right: 64px; border: 1px solid #9bdcaf; background: #e7f9ec; color: #15883d; }.time-results em { position: absolute; right: 6px; color: #15883d; font-size: 7px; font-style: normal; font-weight: 900; }
 .round-winner { width: 94%; padding: 6px; border-radius: 8px; background: var(--navy); color: #ffe28d; text-align: center; font-size: clamp(8px, .65vw, 11px); font-weight: 900; opacity: 0; animation: pop-word .42s 2.8s forwards; }
 
-/* Haaji Naaji */
-.haaji-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8%; }
-.treasure { align-self: center; color: var(--purple); font-size: 11px; font-weight: 900; }.treasure b { display: block; color: var(--navy); font-size: 30px; text-align: center; }
-.choice-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }.choice-row div { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 3px; border: 1px solid #ddcffd; border-radius: 10px; background: #fff; transform: rotateY(90deg); animation: card-flip .45s calc(var(--i, 1) * .2s + .4s) forwards; }.choice-row i { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--lavender); color: var(--navy); font-size: 9px; font-style: normal; font-weight: 900; }.choice-row b { color: var(--purple); font-size: 10px; }.choice-row small { color: var(--muted); font-size: 8px; }
-.choice-result { text-align: center; color: var(--muted); font-size: 10px; opacity: 0; animation: pop-word .45s 1.45s forwards; }.choice-result b { color: var(--navy); font-size: 13px; }.choice-result span { display: inline-block; margin-left: 8px; padding: 4px 8px; border-radius: 6px; background: var(--pale-gold); color: var(--navy); font-weight: 900; }
+/* Perfect Pairs */
+.pairs-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 5%; }
+.pairs-top { display: flex; align-items: center; justify-content: space-between; color: var(--purple); font-size: clamp(7px,.54vw,10px); }.pairs-top span { padding: 4px 7px; border-radius: 6px; background: var(--navy); color: #fff; font-weight: 900; }.pairs-top strong { color: #e94758; letter-spacing: 2px; }
+.pairs-board { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(5, 1fr); gap: 5px; }
+.pairs-board span { position: relative; aspect-ratio: 1.18; display: grid; place-items: center; border: 2px solid #d9ccfb; border-radius: 7px; background: #fff; color: var(--purple); font-size: clamp(12px,1vw,18px); transform-style: preserve-3d; animation: pairs-flip 3.2s 1 both; }
+.pairs-board span b,.pairs-board span i { position: absolute; backface-visibility: hidden; }.pairs-board span i { transform: rotateY(180deg); color: #fff; font-style: normal; font-weight: 900; }.pairs-board span.matched { border-color: #65c482; background: #e7f9ec; color: #16883d; }
+.pairs-status,.math-keyboard { padding: 6px; border-radius: 7px; background: #f1ebff; color: var(--purple); text-align: center; font-size: clamp(7px,.52vw,9px); font-weight: 900; }
+
+/* Math Mania */
+.math-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 5%; }
+.math-timer { align-self: center; color: var(--navy); font-size: clamp(18px,1.55vw,27px); font-weight: 900; }.math-timer span { display: block; color: var(--muted); font-size: 7px; text-align: center; letter-spacing: .12em; }
+.math-player { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 7px; padding: 7px; border: 1px solid #ded4f7; border-radius: 9px; background: #fff; color: var(--navy); opacity: 0; transform: translateX(-12px); animation: guess-in .35s calc(var(--i) * .22s + .2s) forwards; }.math-player > b { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--lavender); font-size: 9px; }.math-player div { display: flex; align-items: baseline; gap: 5px; }.math-player small { color: var(--muted); font-weight: 800; }.math-player strong { padding: 3px 6px; border-bottom: 2px solid var(--purple); font-size: 12px; }.math-player i { color: var(--purple); font-style: normal; animation: pulse .7s infinite; }.math-player > span { color: var(--purple); font-size: 7px; font-weight: 900; }.math-player.math-leader { border-color: #9bdcaf; background: #e7f9ec; }.math-player.math-leader > span { color: #16883d; }
 
 /* Scoring */
 .scoring-demo { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6%; padding: 4%; }.points-row { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 9px 14px; border-radius: 10px; color: var(--navy); transform: translateX(-20px); opacity: 0; animation: guess-in .4s calc(var(--i, 1) * .2s) forwards; }.points-row span { font-size: 24px; font-weight: 900; }.points-row.gold { background: #fff0b8; animation-delay: .2s; }.points-row.silver { background: #efebf4; animation-delay: .5s; }.points-row.bronze { background: #f3d6c5; animation-delay: .8s; }.bonus-card { display: flex; justify-content: space-between; padding: 10px; border: 1px dashed var(--purple); border-radius: 10px; color: var(--purple); font-size: 10px; }.score-equation { text-align: center; color: var(--navy); font-size: 10px; font-weight: 900; }
@@ -296,13 +303,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes player-three-turn { 0%, 40%, 63%, 100% { border-color: #ded4f7; box-shadow: none; background: #fff; } 42%, 61% { border-color: #f47a32; box-shadow: 0 0 0 3px #f47a3230; background: #fff2e9; } }
 @keyframes guess-in { to { opacity: 1; transform: translateX(0); } }
 @keyframes cross-letter { from { color: transparent; } to { color: var(--navy); background: #e9f8ed; } }
-@keyframes clock-spin { from { transform: rotate(0deg); } to { transform: rotate(354deg); } }
 @keyframes target-reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes timer-hide { to { opacity: 0; } }
 @keyframes timer-stop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
 @keyframes stop-press { 50% { transform: translateY(6px) scale(.94); box-shadow: 0 2px 0 #b93636, 0 4px 8px #ee5d5630; } 100% { transform: translateY(4px); box-shadow: 0 3px 0 #b93636, 0 5px 10px #ee5d5635; } }
 @keyframes result-reveal { to { opacity: 1; transform: translateY(0); } }
 @keyframes card-flip { to { transform: rotateY(0); } }
+@keyframes pairs-flip { 0%, 38% { transform: rotateY(0); background: #fff; } 48%, 100% { transform: rotateY(180deg); background: var(--purple); border-color: #8f74e5; } }
 
 @media (max-width: 900px), (max-aspect-ratio: 5/6) {
   body { overflow: auto; }
