@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     title: "Parivar Play — Interactive Presentation",
     description: "Nine games, animated rules, and one leaderboard.",
     type: "website",
-    images: [{ url: "/og-parivar-play.png", width: 1731, height: 909, alt: "Parivar Play interactive presentation" }],
+    images: [{ url: "/og-parivar-play-new-logo.png", width: 1720, height: 914, alt: "Chalo! Madiye Ramiye Jaaniye — Parivar Play interactive presentation" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Parivar Play — Interactive Presentation",
     description: "Nine games, animated rules, and one leaderboard.",
-    images: ["/og-parivar-play.png"],
+    images: ["/og-parivar-play-new-logo.png"],
   },
 };
 
