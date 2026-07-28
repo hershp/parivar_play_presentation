@@ -408,7 +408,20 @@ function SamayDemo() {
 
 function PairsDemo() {
   const symbols = ["★", "●", "▲", "◆", "♥", "☀", "✿", "♣", "☂", "♫", "★", "●", "▲", "◆", "♥", "☀", "✿", "♣", "☂", "♫"];
-  return <div className="pairs-demo"><div className="pairs-top"><b>MEMORIZE</b><span>7 SECONDS</span><strong>♥ ♥ ♥ ♥ ♥</strong></div><div className="pairs-board">{symbols.map((symbol, i) => <span className={i === 0 || i === 10 ? "matched" : ""} style={{ "--i": i } as React.CSSProperties} key={`${symbol}-${i}`}><b>{symbol}</b><i>?</i></span>)}</div><div className="pairs-status">TEAM TURN · FIND ALL 10 PAIRS</div></div>;
+  const cardClass = (i: number) => {
+    if ([1, 2].includes(i)) return "miss-one";
+    if ([3, 4].includes(i)) return "miss-two";
+    if ([0, 10].includes(i)) return "match-one";
+    if ([5, 15].includes(i)) return "match-two";
+    return "";
+  };
+  const messages = [
+    ["TRY 1", "● + ▲ · NO MATCH", "miss"],
+    ["TRY 2", "◆ + ♥ · NO MATCH", "miss"],
+    ["TRY 3", "★ + ★ · PAIR FOUND", "success"],
+    ["TRY 4", "☀ + ☀ · PAIR FOUND", "success"],
+  ];
+  return <div className="pairs-demo"><div className="pairs-top"><b>TEAM MEMORY</b><span>5×4 BOARD</span><strong aria-label="Lives"><i>♥</i><i>♥</i><i>♥</i><i className="life-lost-two">♥</i><i className="life-lost-one">♥</i></strong></div><div className="pairs-board">{symbols.map((symbol, i) => <span className={cardClass(i)} key={`${symbol}-${i}`}><b>{symbol}</b><i>?</i></span>)}</div><div className="pairs-status">{messages.map(([turn, result, outcome], i) => <span className={outcome} style={{ "--i": i } as React.CSSProperties} key={turn}><b>{turn}</b>{result}{outcome === "miss" && <em>−1 LIFE</em>}</span>)}</div></div>;
 }
 
 function MathDemo() {
