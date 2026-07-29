@@ -287,6 +287,7 @@ function WordSearchDemo() {
 
   return (
     <div className="word-demo">
+      <div className="word-round-bar"><span>ROUND 1</span><b>7 WORDS LEFT</b><strong>01:42</strong></div>
       <div className="word-grid">
           {wordGrid.map((letter, i) => {
             const classes = [
@@ -297,6 +298,7 @@ function WordSearchDemo() {
           })}
       </div>
       <div className="found-words"><b>FOUND</b><span className="pop-word diagonal-word">AARTI ↘</span><span className="pop-word">DARSHAN →</span><span>BHAKTI</span></div>
+      <div className="word-player-strip"><span className="active">YOU <b>3</b></span><span>ATMIYA <b>2</b></span><span>BANSI <b>1</b></span></div>
     </div>
   );
 }
@@ -336,18 +338,22 @@ function NumberFlowDemo() {
 
 function BoxesDemo() {
   return (
-    <div className="boxes-board">
-      <div className="box-instruction"><span className="p1-dot" />P1 → <span className="p2-dot" />P2 → <span className="p3-dot" />P3 · REPEAT</div>
-      {Array.from({ length: 16 }, (_, i) => <i className="dot" key={`d${i}`} />)}
-      <i className="box-edge edge-top edge-p1" style={{ "--delay": ".25s" } as React.CSSProperties}/>
-      <i className="box-edge edge-left edge-p2" style={{ "--delay": ".7s" } as React.CSSProperties}/>
-      <i className="box-edge edge-right edge-p3" style={{ "--delay": "1.15s" } as React.CSSProperties}/>
-      <i className="box-edge extra-p1 edge-p1" style={{ "--delay": "1.6s" } as React.CSSProperties}/>
-      <i className="box-edge extra-p2 edge-p2" style={{ "--delay": "2.05s" } as React.CSSProperties}/>
-      <i className="box-edge edge-fourth"/>
-      <span className="claimed-box focus-box"><b>P3</b><small>+1 BOX</small></span>
-      <div className="mini-scores"><b className="p1-score">P1&nbsp; 0</b><b className="p2-score">P2&nbsp; 0</b><b className="score-winner p3-score">P3&nbsp; <span>0</span><strong>1</strong></b></div>
-      <div className="bonus-turn">ORANGE COMPLETES THE BOX · P3 SCORES +1 &amp; PLAYS AGAIN</div>
+    <div className="boxes-demo">
+      <div className="boxes-turn"><span>P3&apos;S TURN</span><b>DRAW ONE LINE</b><strong>09s</strong></div>
+      <div className="boxes-board">
+        <div className="box-instruction"><span className="p1-dot" />P1 → <span className="p2-dot" />P2 → <span className="p3-dot" />P3 · REPEAT</div>
+        {Array.from({ length: 16 }, (_, i) => <i className="dot" key={`d${i}`} />)}
+        <i className="box-edge edge-top edge-p1" style={{ "--delay": ".25s" } as React.CSSProperties}/>
+        <i className="box-edge edge-left edge-p2" style={{ "--delay": ".7s" } as React.CSSProperties}/>
+        <i className="box-edge edge-right edge-p3" style={{ "--delay": "1.15s" } as React.CSSProperties}/>
+        <i className="box-edge extra-p1 edge-p1" style={{ "--delay": "1.6s" } as React.CSSProperties}/>
+        <i className="box-edge extra-p2 edge-p2" style={{ "--delay": "2.05s" } as React.CSSProperties}/>
+        <i className="box-edge edge-fourth"/>
+        <span className="claimed-box focus-box"><b>P3</b><small>+1 BOX</small></span>
+        <div className="mini-scores"><b className="p1-score">P1&nbsp; 0</b><b className="p2-score">P2&nbsp; 0</b><b className="score-winner p3-score">P3&nbsp; <span>0</span><strong>1</strong></b></div>
+        <div className="bonus-turn">ORANGE COMPLETES THE BOX · P3 SCORES +1 &amp; PLAYS AGAIN</div>
+      </div>
+      <div className="boxes-players"><span><i className="p1-dot"/>YOU</span><span><i className="p2-dot"/>ATMIYA</span><span className="playing"><i className="p3-dot"/>BANSI · PLAYING</span></div>
     </div>
   );
 }
@@ -410,10 +416,10 @@ function CrosswordDemo() {
   const dark = new Set([4, 9, 10, 14, 20, 21]);
   const answerCells = [5, 6, 7, 8];
   const answer = ["G", "U", "R", "U"];
-  return <div className="cross-demo"><div className="cross-grid">{Array.from({ length: 25 }, (_, i) => {
+  return <div className="cross-demo"><div className="cross-status"><b>TEAM PUZZLE</b><span>4 CLUES LEFT</span><strong>04:18</strong></div><div className="cross-grid">{Array.from({ length: 25 }, (_, i) => {
     const answerIndex = answerCells.indexOf(i);
     return <span className={`${dark.has(i) ? "black" : ""} ${answerIndex >= 0 ? "active" : ""} ${i === 5 ? "answer-start" : ""}`} style={answerIndex >= 0 ? { "--delay": `${0.45 + answerIndex * 0.28}s` } as React.CSSProperties : undefined} key={i}>{answerIndex >= 0 ? answer[answerIndex] : ""}</span>;
-  })}</div><div className="clue-card"><b>6 ACROSS · 4 LETTERS</b><p>A teacher or spiritual guide</p><span>GURU ✓</span></div></div>;
+  })}</div><div className="clue-card"><b>SELECTED · 6 ACROSS · 4 LETTERS</b><p>A teacher or spiritual guide</p><span>GURU ✓</span></div><div className="cross-team"><b>YOU</b><span>ATMIYA</span><span>BANSI</span><strong>PLAY TOGETHER</strong></div></div>;
 }
 
 function SamayDemo() {
@@ -530,7 +536,15 @@ function Phone({ slide, replay }: { slide: Slide; replay: () => void }) {
       <div className="phone-shell">
         <div className="phone-screen">
           <div className="phone-notch"><i /></div>
-          <div className="phone-meta"><b>DEMO MODE</b><b>{slide.demoMeta}</b></div>
+          <div className="phone-meta" aria-hidden="true">
+            <b>9:52 <span className="silent-icon">◆</span></b>
+            <span className="phone-status">
+              <i className="cell-signal"><b /><b /><b /><b /></i>
+              <i className="wifi-icon">◒</i>
+              <i className="battery-icon"><b>51</b></i>
+            </span>
+          </div>
+          <div className="phone-game-meta"><b>{slide.title}</b><span>{slide.demoMeta}</span></div>
           <div className="demo-stage"><div className="demo-label">{slide.demoLabel}</div><Demo kind={slide.demo} /></div>
           <div className="phone-actions">
             <button onClick={replay} aria-label={`Replay ${slide.title} animation`}>↻ Replay demo</button>
