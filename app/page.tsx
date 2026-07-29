@@ -108,23 +108,21 @@ const slideLibrary: Slide[] = [
   },
   {
     number: "04",
-    title: "Last Man Standing",
-    shortTitle: "Last Man Standing",
-    eyebrow: "PLACE BOMBS · OUTLAST EVERYONE",
-    victory: "First to win 2 rounds",
+    title: "Survival",
+    shortTitle: "Survival",
+    eyebrow: "HIDE BOMBS · SURVIVE THE BOARD",
+    victory: "First player to win 2 rounds",
     playMode: "Competitive",
     rules: [
-      "Each player secretly places three bombs on the grid",
-      "After all nine bombs are placed, take turns selecting squares",
-      "Safe squares reveal nearby bomb counts",
-      "Use those numbers to judge the next move",
-      "Hitting any player's bomb eliminates you for the round",
-      "Running out of turn time also eliminates you",
-      "Last player standing wins the round",
+      "Hide your three bombs before the game starts",
+      "On your turn, tap a square",
+      "A number tells you how many bombs are hiding around it",
+      "Touch any bomb and you are out — even your own",
+      "The last player wins the round; win 2 rounds to win the game",
     ],
     demo: "minesweeper",
-    demoLabel: "BOMB PLACEMENT → SURVIVAL",
-    demoMeta: "3 BOMBS EACH",
+    demoLabel: "ROUND 1 OF 4",
+    demoMeta: "SURVIVAL",
     link: "https://bansipatel.github.io/ClaudeCodeTest/minesweeper.html",
   },
   {
@@ -356,35 +354,35 @@ function BoxesDemo() {
 
 function MinesweeperDemo() {
   const picks: Record<number, { player: string; result: string; value: string; delay: string }> = {
-    0: { player: "P1", result: "safe-pick", value: "", delay: "3.65s" },
-    12: { player: "P2", result: "mine-pick", value: "✹", delay: "4.85s" },
-    18: { player: "P3", result: "safe-pick", value: "2", delay: "6s" },
-    22: { player: "P1", result: "mine-pick", value: "✹", delay: "7.15s" },
+    18: { player: "YOU", result: "safe-pick", value: "1", delay: "3.65s" },
+    30: { player: "ATMIYA", result: "mine-pick", value: "💥", delay: "4.85s" },
+    43: { player: "BANSI", result: "safe-pick", value: "2", delay: "6s" },
+    6: { player: "YOU", result: "mine-pick", value: "💥", delay: "7.15s" },
   };
   const bombs: Record<number, { player: string; delay: string }> = {
-    1: { player: "p1", delay: ".25s" }, 7: { player: "p1", delay: ".48s" }, 19: { player: "p1", delay: ".71s" },
-    3: { player: "p2", delay: "1.15s" }, 12: { player: "p2", delay: "1.38s" }, 22: { player: "p2", delay: "1.61s" },
-    5: { player: "p3", delay: "2.05s" }, 16: { player: "p3", delay: "2.28s" }, 24: { player: "p3", delay: "2.51s" },
+    6: { player: "p1", delay: ".25s" }, 21: { player: "p1", delay: ".48s" }, 51: { player: "p1", delay: ".71s" },
+    14: { player: "p2", delay: "1.15s" }, 30: { player: "p2", delay: "1.38s" }, 60: { player: "p2", delay: "1.61s" },
+    9: { player: "p3", delay: "2.05s" }, 37: { player: "p3", delay: "2.28s" }, 55: { player: "p3", delay: "2.51s" },
   };
   const floodValues: Record<number, string> = {
-    1: "", 2: "", 3: "1", 5: "", 6: "1", 7: "1", 10: "", 11: "1",
-    15: "", 16: "1", 17: "2", 20: "", 21: "",
+    19: "1", 20: "1", 22: "1", 26: "1", 27: "2", 28: "2", 34: "1", 35: "2",
+    36: "2", 42: "1", 44: "1", 50: "1", 52: "1", 58: "1", 59: "1",
   };
   const messages = [
-    ["P1", "SECRETLY PLACES 3 BOMBS", ".05s"],
-    ["P2", "SECRETLY PLACES 3 BOMBS", "1s"],
-    ["P3", "SECRETLY PLACES 3 BOMBS", "1.95s"],
+    ["YOU", "HIDE YOUR 3 BOMBS", ".05s"],
+    ["ATMIYA", "HIDES 3 BOMBS", "1s"],
+    ["BANSI", "HIDES 3 BOMBS", "1.95s"],
     ["ALL", "9 BOMBS HIDDEN · SURVIVAL BEGINS", "2.9s"],
-    ["P1", "PICKS EMPTY · SAFE AREA OPENS", "3.45s"],
-    ["P2", "HITS A BOMB · ELIMINATED", "4.65s"],
-    ["P3", "PICKS SAFE · STAYS IN", "5.8s"],
-    ["P1", "HITS A BOMB · ELIMINATED", "6.95s"],
-    ["P3", "LAST PLAYER STANDING · WINS", "8.05s"],
+    ["YOU", "TAP SAFE · NEARBY COUNTS OPEN", "3.45s"],
+    ["ATMIYA", "TOUCHES A BOMB · OUT", "4.65s"],
+    ["BANSI", "TAPS SAFE · STAYS IN", "5.8s"],
+    ["YOU", "TOUCH A BOMB · OUT", "6.95s"],
+    ["BANSI", "WINS THE ROUND", "8.05s"],
   ];
   return (
     <div className="mine-wrap">
       <div className="mine-turn-banner">{messages.map(([player, text, delay]) => <span style={{ "--delay": delay } as React.CSSProperties} key={text + player}><b>{player}</b> {text}</span>)}</div>
-      <div className="mine-board">{Array.from({ length: 25 }, (_, i) => {
+      <div className="mine-board">{Array.from({ length: 64 }, (_, i) => {
         const pick = picks[i];
         const bomb = bombs[i];
         const isFloodCell = Object.hasOwn(floodValues, i);
@@ -393,10 +391,11 @@ function MinesweeperDemo() {
         return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} data-player={pick?.player} style={style as React.CSSProperties | undefined} key={i}>{bomb && <i className={`placed-bomb ${bomb.player}`} style={{ "--place-delay": bomb.delay } as React.CSSProperties}>✹</i>}{pick?.value ?? floodValues[i]}</span>;
       })}</div>
       <div className="mine-players">
-        <div className="player-one"><b>P1</b><small>READY</small><strong>ELIMINATED</strong></div>
-        <div className="player-two"><b>P2</b><small>READY</small><strong>ELIMINATED</strong></div>
-        <div className="player-three"><b>P3</b><small>READY</small><strong>★ ROUND WINNER</strong></div>
+        <div className="player-one"><b>YOU</b><small>● ●</small><strong>OUT</strong></div>
+        <div className="player-two"><b>ATMIYA</b><small>● ●</small><strong>OUT</strong></div>
+        <div className="player-three"><b>BANSI</b><small>● ●</small><strong>🏆 WINNER</strong></div>
       </div>
+      <div className="mine-winner-card"><span>🏆</span><b>BANSI WON THE ROUND!</b><small>Two players touched a bomb</small></div>
     </div>
   );
 }
