@@ -339,7 +339,7 @@ function NumberFlowDemo() {
 function BoxesDemo() {
   return (
     <div className="boxes-demo">
-      <div className="boxes-turn"><span>P3&apos;S TURN</span><b>DRAW ONE LINE</b><strong>09s</strong></div>
+      <div className="boxes-turn"><PlayerAvatar player={survivalPlayers[2]} className="boxes-turn-avatar" /><div><b>Bansi P.&apos;s Turn</b><span>Draw one line</span></div><strong>9<sub>s</sub></strong></div>
       <div className="boxes-board">
         <div className="box-instruction"><span className="p1-dot" />P1 → <span className="p2-dot" />P2 → <span className="p3-dot" />P3 · REPEAT</div>
         {Array.from({ length: 16 }, (_, i) => <i className="dot" key={`d${i}`} />)}
@@ -353,55 +353,99 @@ function BoxesDemo() {
         <div className="mini-scores"><b className="p1-score">P1&nbsp; 0</b><b className="p2-score">P2&nbsp; 0</b><b className="score-winner p3-score">P3&nbsp; <span>0</span><strong>1</strong></b></div>
         <div className="bonus-turn">ORANGE COMPLETES THE BOX · P3 SCORES +1 &amp; PLAYS AGAIN</div>
       </div>
-      <div className="boxes-players"><span><i className="p1-dot"/>YOU</span><span><i className="p2-dot"/>ATMIYA</span><span className="playing"><i className="p3-dot"/>BANSI · PLAYING</span></div>
+      <div className="boxes-players">
+        <span><PlayerAvatar player={survivalPlayers[0]} />You</span>
+        <span><PlayerAvatar player={survivalPlayers[1]} />Atmiya P.</span>
+        <span className="playing"><PlayerAvatar player={survivalPlayers[2]} />Bansi P. · Playing</span>
+      </div>
     </div>
   );
 }
 
+const survivalPlayers = [
+  { key: "you", initial: "Y", name: "You", avatarClass: "avatar-you" },
+  { key: "p2", initial: "A", name: "Atmiya P.", avatarClass: "avatar-p2" },
+  { key: "p3", initial: "B", name: "Bansi P.", avatarClass: "avatar-p3" },
+] as const;
+
+function PlayerAvatar({ player, className }: { player: (typeof survivalPlayers)[number]; className?: string }) {
+  return <i className={`avatar ${player.avatarClass}${className ? ` ${className}` : ""}`}>{player.initial}</i>;
+}
+
 function MinesweeperDemo() {
   const picks: Record<number, { player: string; result: string; value: string; delay: string }> = {
-    18: { player: "YOU", result: "safe-pick", value: "1", delay: "3.65s" },
-    30: { player: "ATMIYA", result: "mine-pick", value: "💥", delay: "4.85s" },
-    43: { player: "BANSI", result: "safe-pick", value: "2", delay: "6s" },
-    6: { player: "YOU", result: "mine-pick", value: "💥", delay: "7.15s" },
-  };
-  const bombs: Record<number, { player: string; delay: string }> = {
-    6: { player: "p1", delay: ".25s" }, 21: { player: "p1", delay: ".48s" }, 51: { player: "p1", delay: ".71s" },
-    14: { player: "p2", delay: "1.15s" }, 30: { player: "p2", delay: "1.38s" }, 60: { player: "p2", delay: "1.61s" },
-    9: { player: "p3", delay: "2.05s" }, 37: { player: "p3", delay: "2.28s" }, 55: { player: "p3", delay: "2.51s" },
+    18: { player: "YOU", result: "safe-pick", value: "1", delay: ".8s" },
+    43: { player: "ATMIYA", result: "safe-pick", value: "2", delay: "1.8s" },
+    30: { player: "BANSI", result: "mine-pick", value: "💥", delay: "2.6s" },
+    6: { player: "ATMIYA", result: "mine-pick", value: "💥", delay: "3.4s" },
   };
   const floodValues: Record<number, string> = {
     19: "1", 20: "1", 22: "1", 26: "1", 27: "2", 28: "2", 34: "1", 35: "2",
     36: "2", 42: "1", 44: "1", 50: "1", 52: "1", 58: "1", 59: "1",
   };
-  const messages = [
-    ["YOU", "HIDE YOUR 3 BOMBS", ".05s"],
-    ["ATMIYA", "HIDES 3 BOMBS", "1s"],
-    ["BANSI", "HIDES 3 BOMBS", "1.95s"],
-    ["ALL", "9 BOMBS HIDDEN · SURVIVAL BEGINS", "2.9s"],
-    ["YOU", "TAP SAFE · NEARBY COUNTS OPEN", "3.45s"],
-    ["ATMIYA", "TOUCHES A BOMB · OUT", "4.65s"],
-    ["BANSI", "TAPS SAFE · STAYS IN", "5.8s"],
-    ["YOU", "TOUCH A BOMB · OUT", "6.95s"],
-    ["BANSI", "WINS THE ROUND", "8.05s"],
+  const turnStates = [
+    { player: survivalPlayers[0], status: "Tap a square to reveal it", timer: "8", delay: "0s" },
+    { player: survivalPlayers[1], status: "Waiting for their move...", timer: "9", delay: "1s" },
+    { player: survivalPlayers[2], status: "Waiting for their move...", timer: "7", delay: "2s" },
+    { player: survivalPlayers[1], status: "Waiting for their move...", timer: "8", delay: "2.9s" },
+    { player: survivalPlayers[0], status: "Tap a square to reveal it", timer: "6", delay: "3.7s" },
   ];
   return (
     <div className="mine-wrap">
-      <div className="mine-turn-banner">{messages.map(([player, text, delay]) => <span style={{ "--delay": delay } as React.CSSProperties} key={text + player}><b>{player}</b> {text}</span>)}</div>
-      <div className="mine-board">{Array.from({ length: 64 }, (_, i) => {
-        const pick = picks[i];
-        const bomb = bombs[i];
-        const isFloodCell = Object.hasOwn(floodValues, i);
-        const floodOrder = Object.keys(floodValues).indexOf(String(i));
-        const style = pick ? { "--delay": pick.delay } : isFloodCell ? { "--delay": `${3.9 + floodOrder * .035}s` } : undefined;
-        return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} data-player={pick?.player} style={style as React.CSSProperties | undefined} key={i}>{bomb && <i className={`placed-bomb ${bomb.player}`} style={{ "--place-delay": bomb.delay } as React.CSSProperties}>✹</i>}{pick?.value ?? floodValues[i]}</span>;
-      })}</div>
-      <div className="mine-players">
-        <div className="player-one"><b>YOU</b><small>● ●</small><strong>OUT</strong></div>
-        <div className="player-two"><b>ATMIYA</b><small>● ●</small><strong>OUT</strong></div>
-        <div className="player-three"><b>BANSI</b><small>● ●</small><strong>🏆 WINNER</strong></div>
+      <div className="mine-stage">
+        <div className="survival-turn">
+          {turnStates.map((state, i) => (
+            <div className="turn-state" style={{ "--delay": state.delay } as React.CSSProperties} key={i}>
+              <PlayerAvatar player={state.player} />
+              <div><b>{state.player.name}&apos;S TURN</b><small>{state.status}</small></div>
+              <strong>{state.timer}<sub>s</sub></strong>
+            </div>
+          ))}
+        </div>
+        <div className="mine-board">{Array.from({ length: 64 }, (_, i) => {
+          const pick = picks[i];
+          const isFloodCell = Object.hasOwn(floodValues, i);
+          const floodOrder = Object.keys(floodValues).indexOf(String(i));
+          const style = pick ? { "--delay": pick.delay } : isFloodCell ? { "--delay": `${.5 + floodOrder * .025}s` } : undefined;
+          return <span className={`mine-cell${pick ? ` ${pick.result}` : isFloodCell ? " flood-cell" : ""}`} style={style as React.CSSProperties | undefined} key={i}>{pick?.value ?? floodValues[i]}</span>;
+        })}</div>
+        <div className="survival-roundover">
+          <span className="ro-trophy">🏆</span>
+          <b className="ro-title">You won the round!</b>
+          <div className="ro-log">
+            <span>💥 bansi p. stepped on atmiya p.&apos;s mine</span>
+            <span>💥 atmiya p. blew themselves up</span>
+          </div>
+          <div className="ro-card">
+            <div className="ro-row"><PlayerAvatar player={survivalPlayers[0]} /><b className="ro-you">You</b><span className="track-checks"><i className="filled" /><i /></span></div>
+            <div className="ro-row"><PlayerAvatar player={survivalPlayers[1]} /><b className="ro-out">Atmiya P.</b><span className="track-checks"><i /><i /></span><small>OUT</small></div>
+            <div className="ro-row"><PlayerAvatar player={survivalPlayers[2]} /><b className="ro-out">Bansi P.</b><span className="track-checks"><i /><i /></span><small>OUT</small></div>
+          </div>
+          <small className="ro-next">Next round...</small>
+        </div>
       </div>
-      <div className="mine-winner-card"><span>🏆</span><b>BANSI WON THE ROUND!</b><small>Two players touched a bomb</small></div>
+      <div className="survival-track">
+        <div className="track-player you track-you">
+          <span className="track-badge">PLAYING</span>
+          <PlayerAvatar player={survivalPlayers[0]} />
+          <b>You</b>
+          <span className="track-checks"><i /><i /></span>
+        </div>
+        <div className="track-player track-p2 out">
+          <span className="track-badge">PLAYING</span>
+          <PlayerAvatar player={survivalPlayers[1]} />
+          <b>Atmiya P.</b>
+          <span className="track-checks"><i /><i /></span>
+          <small className="track-out">OUT</small>
+        </div>
+        <div className="track-player track-p3 out">
+          <span className="track-badge">PLAYING</span>
+          <PlayerAvatar player={survivalPlayers[2]} />
+          <b>Bansi P.</b>
+          <span className="track-checks"><i /><i /></span>
+          <small className="track-out">OUT</small>
+        </div>
+      </div>
     </div>
   );
 }
