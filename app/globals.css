@@ -77,9 +77,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .battery-icon { position: relative; min-width: 23px; height: 11px; display: grid; place-items: center; border: 1px solid #77737e; border-radius: 3px; font-style: normal; }
 .battery-icon::after { content: ""; position: absolute; right: -3px; width: 2px; height: 5px; border-radius: 0 2px 2px 0; background: #77737e; }
 .battery-icon b { position: absolute; inset: 0 46% 0 0; display: grid; place-items: center; border-radius: 2px; background: #111018; color: #fff; font-size: 6px; line-height: 1; }
-.phone-game-meta { min-height: 5.6%; display: flex; align-items: baseline; justify-content: space-between; gap: 5px; padding: 0 1% 3%; color: var(--navy); }
-.phone-game-meta b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: clamp(9px,.72vw,13px); }
-.phone-game-meta span { flex: 0 0 auto; color: #8d83a0; font-size: clamp(6px,.45vw,8px); font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
 .demo-stage { position: relative; min-height: 0; flex: 1; overflow: hidden; border: 1.5px solid #decdf4; border-radius: 20px; background: linear-gradient(180deg, #fff8fc, #f5edff); padding: 13% 6% 5%; box-shadow: inset 0 0 0 1px #ffffffa8; }
 .demo-label { position: absolute; top: 4.2%; left: 6%; right: 6%; text-align: center; color: var(--purple); font-size: clamp(9px, .88vw, 15px); font-weight: 900; letter-spacing: .04em; }
 .phone-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 4%; }

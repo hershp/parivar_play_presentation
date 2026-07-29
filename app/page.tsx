@@ -537,14 +537,13 @@ function Phone({ slide, replay }: { slide: Slide; replay: () => void }) {
         <div className="phone-screen">
           <div className="phone-notch"><i /></div>
           <div className="phone-meta" aria-hidden="true">
-            <b>9:52 <span className="silent-icon">◆</span></b>
+            <b>9:36 <span className="silent-icon">◆</span></b>
             <span className="phone-status">
               <i className="cell-signal"><b /><b /><b /><b /></i>
               <i className="wifi-icon">◒</i>
               <i className="battery-icon"><b>51</b></i>
             </span>
           </div>
-          <div className="phone-game-meta"><b>{slide.title}</b><span>{slide.demoMeta}</span></div>
           <div className="demo-stage"><div className="demo-label">{slide.demoLabel}</div><Demo kind={slide.demo} /></div>
           <div className="phone-actions">
             <button onClick={replay} aria-label={`Replay ${slide.title} animation`}>↻ Replay demo</button>
